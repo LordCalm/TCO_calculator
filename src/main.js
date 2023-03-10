@@ -3,5 +3,9 @@ import App from './App.vue'
 
 import './assets/bootstrap.css'
 import './assets/calc.css'
+import './download-csv.js'
+import VuePapaParse from 'vue-papa-parse'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+app.use(VuePapaParse)
+app.mount('#app')
