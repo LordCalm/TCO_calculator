@@ -122,16 +122,16 @@ export default {
 
 <template>
   <div class="container-fluid">
-    <div class="container">
+    <div class="container m-4">
       <button class="btn btn-primary" type="button" v-on:click="Download_csv">
         Скачать CSV
       </button>
     </div>
-    <div class="container">
+    <div class="container m-4">
       <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExplanations" aria-expanded="false" aria-controls="collapseExplanations">
         Показать пояснения
       </button>
-      <div class="introduction fs-5 text-wrap collapse" id="collapseExplanations">
+      <div class="introduction fs-5 text-wrap collapse m-3" id="collapseExplanations">
         Методика ТСО (Total cost of ownership — совокупная стоимость владения) разработана в конце 80-х компанией Gartner Group 
         для определения финансовых затрат на владение компьютерами. 
         Методика была усовершенствована в 1994 г. фирмой Intepose и переработана в полноценную модель анализа 
@@ -153,7 +153,7 @@ export default {
           <p class="introduction fs-5 text-wrap text-center p-2">Модель TCO, предложенная Gartner Group</p>
         </div>
       </div>
-      <div class="container table-responsive">
+      <div class="container table-responsive m-4">
         <table class="table table-bordered">
           <thead class="table-light">
             <tr>
@@ -242,7 +242,7 @@ export default {
         </table>
       </div>
     </div>
-    <div class="container">
+    <div class="container m-4">
       <div 
         class="dropzone container w-50 border rounded-3 shadow bg-light d-flex flex-column align-items-center"
         @dragenter.prevent="toggleActive" 
@@ -271,8 +271,8 @@ export default {
     background-color: var(--bs-gray-200) !important;
 }
 .active-dropzone label {
-    border-color: var(--bs-orange) !important;
-    background-color: var(--bs-orange) !important;
+    border-color:  #D13C16 !important;
+    background-color: #FF6000 !important;
 }
 </style>
 
