@@ -11,3 +11,9 @@ export default {
         @input="$emit('update:modelValue', $event.target.value)"
     />
 </template>
+
+<style scoped>
+input{
+    width: 80px;
+}
+</style>

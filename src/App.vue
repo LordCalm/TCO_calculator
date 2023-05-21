@@ -485,6 +485,8 @@ export default {
       ["Длительность опытной эксплуатации", this.parameterList[32].number],
       ["Коэ", this.Trial_operation_costs],
       ["К", this.Capital_expenditures],
+      ["Зарплата эксплуатационная", this.parameterList[38].number],
+      ["Часы эксплуатационные", this.parameterList[39].number],
       ["Сзп", this.parameterList[38].number * this.parameterList[39].number / 40],
       ["Стоимость оборудования", this.parameterList[40].number],
       ["Количество часов эксплуатации оборудования", this.parameterList[41].number],
@@ -531,6 +533,24 @@ export default {
                 self.parameterList[4].number = results.data[7][3];
                 self.parameterList[5].number = results.data[8][3];
                 self.parameterList[6].number = results.data[9][1];
+                self.parameterList[7].number = results.data[10][1];
+                self.parameterList[8].number = results.data[11][1];
+                self.parameterList[12].number = results.data[12][1];
+                self.parameterList[13].number = results.data[16][1];
+                self.parameterList[14].number = results.data[17][1];
+                self.parameterList[17].number = results.data[20][1];
+                self.parameterList[18].number = results.data[21][1];
+                self.parameterList[21].number = results.data[23][1];
+                self.parameterList[22].number = results.data[24][1];
+                self.parameterList[23].number = results.data[25][1];
+                self.parameterList[25].number = results.data[26][1];
+                self.parameterList[26].number = results.data[27][1];
+                self.parameterList[27].number = results.data[28][1];
+                self.parameterList[28].number = results.data[29][1];
+                self.parameterList[29].number = results.data[31][1];
+                self.parameterList[30].number = results.data[32][1];
+                self.parameterList[31].number = results.data[33][1];
+                self.parameterList[32].number = results.data[34][1];
               }
           });
       }
@@ -550,36 +570,49 @@ export default {
 </script>
 
 <template>
-  <div class="container-fluid d-flex flex-column align-items-center p-0 m-0 position-relative">
-    <div class="container-fluid sticky-top p-0">
-      <nav id="navbar-tco" class="navbar justify-content-center navbar-light bg-light px-3">
-        <a class="navbar-brand fs-1" href="#">Методика ТСО</a>
-        <ul class="nav nav-pills" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link fs-2" href="#scrollspyHeading1">Проектные затраты</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fs-2" href="#scrollspyHeading2">Капитальные затраты</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fs-2" href="#scrollspyHeading3">Эксплуатационные затраты</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fs-2" href="#scrollspyHeading4">ТСО</a>
-          </li>
-        </ul>
-      </nav>
+  <nav class="navbar navbar-expand-lg bg-light fixed-top" aria-label="Offcanvas навигационная панель большая">
+    <div class="container">
+      <a class="navbar-brand text-dark h2 fs-2 ps-4" href="#">Методика ТСО</a>
+      <div class="navbar-light">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+        <div class="offcanvas-header">
+          <h3 class="offcanvas-title" id="offcanvasNavbar2Label">Методика ТСО</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Закрывать"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav nav-pills justify-content-end flex-grow-1 pe-3 fs-5" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link fs-5 px-2 active" aria-current="page" href="#scrollspyHeading1">Проектные затраты</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fs-5 px-2" href="#scrollspyHeading2">Капитальные затраты</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fs-5 px-2" href="#scrollspyHeading3">Эксплуатационные затраты</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fs-5 px-2" href="#scrollspyHeading4">ТСО</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div data-bs-spy="scroll" data-bs-target="#navbar-tco" data-bs-offset="0" tabindex="0" class="container scrollspy-area position-relative p-0 m-0">
-      <div class="container d-flex flex-column m-4 shadow rounded-3 overflow-scroll" id="scrollspyHeading1">
-        <div class="h2 m-4">
+  </nav>
+  <div data-bs-spy="scroll" data-bs-target="#offcanvasNavbar2" data-bs-offset="0" tabindex="0" class="container-fluid d-flex flex-column align-items-center p-0 m-0 position-relative">
+    <div class="container position-relative p-0 m-0 mt-5">
+      <div class="d-flex flex-column m-4 shadow rounded-3" id="scrollspyHeading1">
+        <div class="row h2 m-4">
           Методика ТСО
         </div>
-        <button class="btn btn-primary fs-5 m-4 me-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExplanations" aria-expanded="false" aria-controls="collapseExplanations">
+        <button class="btn btn-primary fs-5 m-4 me-auto w-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExplanations" aria-expanded="false" aria-controls="collapseExplanations">
           Показать пояснения
         </button>
-        <div class="collapse container m-0 p-4" id="collapseExplanations">
-          <div class="introduction fs-5 text-wrap">
+        <div class="collapse row m-0 p-4 justify-content-center" id="collapseExplanations">
+          <div class="introduction row fs-5 text-wrap">
             Методика ТСО (Total cost of ownership — совокупная стоимость владения) разработана в конце 80-х компанией Gartner Group 
             для определения финансовых затрат на владение компьютерами. 
             Методика была усовершенствована в 1994 г. фирмой Intepose и переработана в полноценную модель анализа 
@@ -591,27 +624,32 @@ export default {
             Цель применения методики ТСО – получить картину, которая отражала бы реальные затраты, связанные с приобретением определенных 
             средств и технологий, и учитывала все аспекты их последующего использования.
           </div>
-          <div class="row align-items-center mt-4" >
-            <div class="container border rounded-3 shadow col-5">
-              <img src="src/Images/TCO-Microsoft.png" class="img-fluid p-4" alt="Модель ТСО, разработанная компанией Microsoft совместно с Interpose">
-              <p class="introduction fs-5 text-wrap text-center p-2">Модель ТСО, разработанная компанией Microsoft совместно с Interpose</p>
+          <div class="row row-cols-auto row-cols-md-2 g-0 g-md-4" >
+            <div class="col">
+              <div class="border rounded-3 shadow">
+                <img src="src/Images/TCO-Microsoft.png" class="img-fluid p-4" alt="Модель ТСО, разработанная компанией Microsoft совместно с Interpose">
+                <p class="introduction fs-5 text-wrap text-center p-2">Модель ТСО, разработанная компанией Microsoft совместно с Interpose</p>
+              </div>
             </div>
-            <div class="container align-self-center h-auto border rounded-3 shadow col-6">
-              <img src="src/Images/TCO-GartnerGroup.png" class="img-fluid p-4" alt="Модель TCO, предложенная Gartner Group">
-              <p class="introduction fs-5 text-wrap text-center p-2">Модель TCO, предложенная Gartner Group</p>
+            <div class="col">
+              <div class="align-self-center h-auto border rounded-3 shadow">
+                <img src="src/Images/TCO-GartnerGroup.png" class="img-fluid p-4" alt="Модель TCO, предложенная Gartner Group">
+                <p class="introduction fs-5 text-wrap text-center p-2">Модель TCO, предложенная Gartner Group</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="container d-flex flex-column m-4 shadow rounded-3 overflow-scroll">
+      <div class="d-flex flex-column m-4 shadow rounded-3">
         <div class="h2 m-4">
           Проектные затраты в составе капитальных затрат
         </div>
-        <button class="btn btn-primary fs-5 m-4 me-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCapitalExpenditures" aria-expanded="false" aria-controls="collapseCapitalExpenditures">
+        <button class="btn btn-primary fs-5 m-4 me-auto w-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCapitalExpenditures" aria-expanded="false" aria-controls="collapseCapitalExpenditures">
           Показать пояснения
         </button>
-        <div class="container m-4 collapse fs-5 text-wrap" id="collapseCapitalExpenditures">
-          Капитальные затраты на разработку информационной системы вычисляются по формуле<br>
+        <div class="row p-4 collapse fs-5 text-wrap" id="collapseCapitalExpenditures">
+          <div class="col">
+            Капитальные затраты на разработку информационной системы вычисляются по формуле<br>
           <br>
           К = К<sub>пр</sub> + К<sub>тс</sub> + К<sub>лс</sub> + К<sub>по</sub> + К<sub>ио</sub> + К<sub>об</sub> + К<sub>оэ</sub>,<br>
           <br>
@@ -631,10 +669,11 @@ export default {
           К<sub>ипс</sub> – затраты на инструментальные программные средства; <br>
           К<sub>свт</sub> – затраты на средства вычислительной техники;<br>
           К<sub>проч</sub> – прочие затраты на проектирование.<br>
+          </div>
         </div>
-        <div class="container m-4">
+        <div class="row p-4">
           <p class="h4">К<sub>зп</sub></p>
-          <div class="container table-responsive fs-5">
+          <div class="table-responsive fs-5">
             <table class="table table-bordered">
               <thead class="table-light">
                 <tr>
@@ -734,12 +773,12 @@ export default {
             </table>
           </div>  
         </div>
-        <div class="container m-4">
+        <div class="row p-4">
           <p class="h4">К<sub>ипс</sub></p>
-          <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDepreciation" aria-expanded="false" aria-controls="collapseDepreciation">
+          <button class="btn btn-primary fs-5 me-auto w-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDepreciation" aria-expanded="false" aria-controls="collapseDepreciation">
             Показать пояснения
           </button>
-          <div class="container m-4 collapse fs-5 text-wrap" id="collapseDepreciation">
+          <div class="col p-4 collapse fs-5 text-wrap" id="collapseDepreciation">
             Амортизация рассчитывается по формуле<br>
             <br>
             А<sub>год</sub> = С<sub>б</sub> ∙ Н<sub>ам</sub>,<br>
@@ -762,22 +801,22 @@ export default {
             где Т<sub>эк</sub> – срок эксплуатации компьютера.<br>
           </div>
           <div class="row align-items-center">
-            <div class="container mx-4 p-0 fs-5 col-4"><p>Стоимость ПК для разработки</p></div>
-            <div class="container fs-5 col-2">
+            <div class="col mx-4 p-0 fs-5 col-4"><p>Стоимость ПК для разработки</p></div>
+            <div class="col fs-5 col-2">
               <CalculationParameter
                 v-model="parameterList[7].number" />
             </div>
           </div>
           <div class="row align-items-center">
-            <div class="container mx-4 p-0 fs-5 col-4"><p>Количество дней эксплуатации ПК (длительность периода разработки ИС)</p></div>
-            <div class="container fs-5 col-2">
+            <div class="col mx-4 p-0 fs-5 col-4"><p>Количество дней эксплуатации ПК (длительность периода разработки ИС)</p></div>
+            <div class="col fs-5 col-2">
               <CalculationParameter
                 v-model="parameterList[8].number" />
             </div>
           </div>
           <div class="row align-items-center">
-            <div class="container mx-4 p-0 fs-5 col-4"><p>Срок службы ПК</p></div>
-            <div class="container fs-5 col-2">
+            <div class="col mx-4 p-0 fs-5 col-4"><p>Срок службы ПК</p></div>
+            <div class="col fs-5 col-2">
               <CalculationParameter
                 v-model="parameterList[12].number" />
             </div>
@@ -792,40 +831,40 @@ export default {
             А<sub>пр</sub> = {{ Depreciation_per_project }} руб.
           </div>
         </div>
-        <div class="container m-4">
+        <div class="row p-4">
           <p class="h4">К<sub>свт</sub></p>
           <div class="row align-items-center">
-            <div class="container mx-4 p-0 fs-5 col-4"><p>Затраты на инструментальные программные средства</p></div>
-            <div class="container fs-5 col-2">
+            <div class="col mx-4 p-0 fs-5 col-4"><p>Затраты на инструментальные программные средства</p></div>
+            <div class="col fs-5 col-2">
               <CalculationParameter
                 v-model="parameterList[13].number" />
             </div>
           </div>
         </div>
-        <div class="container m-4">
+        <div class="row p-4">
           <p class="h4">К<sub>проч</sub></p>
           <div class="row align-items-center">
-            <div class="container mx-4 p-0 fs-5 col-4"><p>
+            <div class="col mx-4 p-0 fs-5 col-4"><p>
               Прочие расходы связаны с неучтенными затратами, 
               включающими электроэнергию, администрирование, 
               обслуживание сервера и другие статьи затрат не подлежащие точному учету.<br>
               Рекомендуется 3-5%.
             </p></div>
-            <div class="container fs-5 col-2">
+            <div class="col fs-5 col-2">
               <CalculationParameter
                 v-model="parameterList[14].number" />
             </div>
           </div>
           <div class="row align-items-center">
-            <div class="container mx-4 p-0 fs-5 col-4">
+            <div class="col mx-4 p-0 fs-5 col-4">
               Прочие затраты на проектирование
             </div>
-            <div class="container fs-5 col-2">
+            <div class="col fs-5 col-2">
               К<sub>проч</sub> = {{ Other_design_costs }} руб.
             </div>
           </div>
         </div>
-        <div class="container m-4">
+        <div class="row p-4">
           <p class="h4">
             К<sub>пр</sub> = 
             {{ parameterList[6].number }} + 
@@ -836,277 +875,277 @@ export default {
           </p>
         </div>
       </div>
-      <div class="container d-flex flex-column m-4 shadow rounded-3 overflow-scroll" id="scrollspyHeading2">
+      <div class="d-flex flex-column m-4 shadow rounded-3" id="scrollspyHeading2">
         <div class="h2 m-4">
           Капитальные затраты
         </div>
-        <div class="container m-4">
+        <div class="row p-4">
         <p class="h4">
           К<sub>тс</sub>
         </p>
-        <div class="container fs-5 text-wrap">
+        <div class="col fs-5 text-wrap">
           Затраты на технические средства управления. Затраты 
           на технические средства управления включают в себя стоимость компьютера и серверного ПК. 
         </div>
         <div class="row align-items-center">
-          <div class="container mx-4 p-0 fs-5 col-4"><p>
+          <div class="col mx-4 p-0 fs-5 col-4"><p>
             Длительность тестирования и введения в эксплуатацию.
           </p></div>
-          <div class="container fs-5 col-2">
+          <div class="col fs-5 col-2">
             <CalculationParameter
               v-model="parameterList[17].number" />
           </div>
         </div>
         <div class="row align-items-center">
-          <div class="container mx-4 p-0 fs-5 col-4"><p>
+          <div class="col mx-4 p-0 fs-5 col-4"><p>
             Амортизация серверного ПК (если есть)
           </p></div>
-          <div class="container fs-5 col-2">
+          <div class="col fs-5 col-2">
             <CalculationParameter
               v-model="parameterList[18].number" />
           </div>
         </div>
-        <div class="container fs-5 text-wrap">
+        <div class="row fs-5 text-wrap">
           К<sub>тс</sub> = 
           {{ Costs_for_technical_controls_1 }} + 
           {{ parameterList[18].number }} = 
           {{ Costs_for_technical_controls_2 }}
         </div>
-      </div>
-      <div class="container m-4">
-        <p class="h4">
-          К<sub>лс</sub>
-        </p>
-        <div class="row align-items-center">
-          <div class="container mx-4 p-0 fs-5 col-4"><p>
-            Затраты на создание линий связи локальных сетей
-          </p></div>
-          <div class="container fs-5 col-2">
-            <CalculationParameter
-              v-model="parameterList[21].number" />
+        </div>
+        <div class="row p-4">
+          <p class="h4">
+            К<sub>лс</sub>
+          </p>
+          <div class="row align-items-center">
+            <div class="col mx-4 p-0 fs-5 col-4"><p>
+              Затраты на создание линий связи локальных сетей
+            </p></div>
+            <div class="col fs-5 col-2">
+              <CalculationParameter
+                v-model="parameterList[21].number" />
+            </div>
           </div>
         </div>
-      </div>
-      <div class="container m-4">
-        <p class="h4">
-          К<sub>по</sub>
-        </p>
-        <div class="row align-items-center">
-          <div class="container mx-4 p-0 fs-5 col-4"><p>
-            Затраты на программные средства
-          </p></div>
-          <div class="container fs-5 col-2">
-            <CalculationParameter
-              v-model="parameterList[22].number" />
+        <div class="row p-4">
+          <p class="h4">
+            К<sub>по</sub>
+          </p>
+          <div class="row align-items-center">
+            <div class="col mx-4 p-0 fs-5 col-4"><p>
+              Затраты на программные средства
+            </p></div>
+            <div class="col fs-5 col-2">
+              <CalculationParameter
+                v-model="parameterList[22].number" />
+            </div>
           </div>
         </div>
-      </div>
-      <div class="container m-4">
-        <p class="h4">
-          К<sub>ио</sub>
-        </p>
-        <div class="row align-items-center">
-          <div class="container mx-4 p-0 fs-5 col-4"><p>
-            Затраты на формирование информационной базы
-          </p></div>
-          <div class="container fs-5 col-2">
-            <CalculationParameter
-              v-model="parameterList[23].number" />
+        <div class="row p-4">
+          <p class="h4">
+            К<sub>ио</sub>
+          </p>
+          <div class="row align-items-center">
+            <div class="col mx-4 p-0 fs-5 col-4"><p>
+              Затраты на формирование информационной базы
+            </p></div>
+            <div class="col fs-5 col-2">
+              <CalculationParameter
+                v-model="parameterList[23].number" />
+            </div>
           </div>
         </div>
-      </div>
-      <div class="container m-4">
-        <p class="h4">
-          К<sub>об</sub>
-        </p>
-        <div class="row align-items-center">
-          <div class="container mx-4 p-0 fs-5 col-4"><p>
-            Оклад тренера
-          </p></div>
-          <div class="container fs-5 col-2">
-            <CalculationParameter
-              v-model="parameterList[25].number" />
+        <div class="row p-4">
+          <p class="h4">
+            К<sub>об</sub>
+          </p>
+          <div class="row align-items-center">
+            <div class="col mx-4 p-0 fs-5 col-4"><p>
+              Оклад тренера
+            </p></div>
+            <div class="col fs-5 col-2">
+              <CalculationParameter
+                v-model="parameterList[25].number" />
+            </div>
+          </div>
+          <div class="row align-items-center">
+            <div class="col mx-4 p-0 fs-5 col-4"><p>
+              Надбавка за стаж тренера
+            </p></div>
+            <div class="col fs-5 col-2">
+              <CalculationParameter
+                v-model="parameterList[26].number" />
+            </div>
+          </div>
+          <div class="row align-items-center">
+            <div class="col mx-4 p-0 fs-5 col-4"><p>
+              Районный коэффициент тренера
+            </p></div>
+            <div class="col fs-5 col-2">
+              <CalculationParameter
+                v-model="parameterList[27].number" />
+            </div>
+          </div>
+          <div class="row align-items-center">
+            <div class="col mx-4 p-0 fs-5 col-4"><p>
+              Длительность обучения
+            </p></div>
+            <div class="col fs-5 col-2">
+              <CalculationParameter
+                v-model="parameterList[28].number" />
+            </div>
+          </div>
+          <div class="container fs-5 text-wrap">
+            К<sub>об</sub> = 
+            ({{ this.parameterList[25].number }} * ( 1 +
+            {{ this.parameterList[26].number }} + 
+            {{ this.parameterList[27].number }})) * 1.43 * 
+            {{ parameterList[28].number }} = 
+            {{ Staff_training_costs }} руб.
           </div>
         </div>
-        <div class="row align-items-center">
-          <div class="container mx-4 p-0 fs-5 col-4"><p>
-            Надбавка за стаж тренера
-          </p></div>
-          <div class="container fs-5 col-2">
-            <CalculationParameter
-              v-model="parameterList[26].number" />
+        <div class="row p-4">
+          <p class="h4">
+            К<sub>оэ</sub>
+          </p>
+          <div class="table-responsive fs-5">
+            <table class="table table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col" colspan="2">Доходы</th>
+                  <th scope="col" colspan="2">Расходы</th>
+                </tr>
+                <tr>
+                  <th scope="col">Название</th>
+                  <th scope="col">Сумма, руб.</th>
+                  <th scope="col">Название</th>
+                  <th scope="col">Сумма, руб.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Оклад</td>
+                  <td>
+                    <CalculationParameter
+                    v-model="parameterList[29].number" /> 
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Надбавка за стаж работы в указанной местности</td>
+                  <td class="p-0">
+                    <table class="table table-borderless mb-0">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <CalculationParameter
+                            v-model="parameterList[30].number" />
+                          </td>
+                          <td>
+                            {{ Math.round(parameterList[29].number * parameterList[30].number) }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Районный коэффициент</td>
+                  <td class="p-0">
+                    <table class="table table-borderless mb-0">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <CalculationParameter
+                            v-model="parameterList[31].number" />
+                          </td>
+                          <td>
+                            {{ Math.round(parameterList[29].number * parameterList[31].number) }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Все доходы</th>
+                  <td>
+                    {{ Math.round(parameterList[29].number * (1 + parameterList[30].number + parameterList[31].number)) }}
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <td></td>
+                  <td>НДФЛ</td>
+                  <td>
+                    {{ Math.round((parameterList[29].number * (1 + parameterList[30].number + parameterList[31].number)) * 0.13) }}
+                  </td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <td></td>
+                  <td>Отчисления во внебюджетные фонды</td>
+                  <td>
+                    {{ Math.round((parameterList[29].number * (1 + parameterList[30].number + parameterList[31].number)) * 0.3) }}
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Итог</th>
+                  <td colspan="3">
+                    {{ Math.round((parameterList[29].number * (1 + parameterList[30].number + parameterList[31].number)) * 1.43) }}
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="row align-items-center">
+            <div class="col mx-4 p-0 fs-5 col-4"><p>
+              Длительность опытной эксплуатации
+            </p></div>
+            <div class="col fs-5 col-2">
+              <CalculationParameter
+                v-model="parameterList[32].number" />
+            </div>
+          </div>
+          <div class="container fs-5 text-wrap">
+            К<sub>оэ</sub> = 
+            ({{ this.parameterList[29].number }} * ( 1 +
+            {{ this.parameterList[30].number }} + 
+            {{ this.parameterList[31].number }})) * 1.43 * 
+            {{ parameterList[32].number }} = 
+            {{ Math.round(Trial_operation_costs) }} руб.
           </div>
         </div>
-        <div class="row align-items-center">
-          <div class="container mx-4 p-0 fs-5 col-4"><p>
-            Районный коэффициент тренера
-          </p></div>
-          <div class="container fs-5 col-2">
-            <CalculationParameter
-              v-model="parameterList[27].number" />
-          </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="container mx-4 p-0 fs-5 col-4"><p>
-            Длительность обучения
-          </p></div>
-          <div class="container fs-5 col-2">
-            <CalculationParameter
-              v-model="parameterList[28].number" />
-          </div>
-        </div>
-        <div class="container fs-5 text-wrap">
-          К<sub>об</sub> = 
-          ({{ this.parameterList[25].number }} * ( 1 +
-          {{ this.parameterList[26].number }} + 
-          {{ this.parameterList[27].number }})) * 1.43 * 
-          {{ parameterList[28].number }} = 
-          {{ Staff_training_costs }} руб.
+        <div class="row p-4">
+          <p class="h4">
+            К = 
+            {{ parameterList[16].number }} + 
+            {{ parameterList[20].number }} + 
+            {{ parameterList[21].number }} + 
+            {{ parameterList[22].number }} + 
+            {{ parameterList[23].number }} + 
+            {{ parameterList[24].number }} + 
+            {{ parameterList[33].number }} = 
+            {{ Capital_expenditures }}
+          </p>
         </div>
       </div>
-      <div class="container m-4">
-        <p class="h4">
-          К<sub>оэ</sub>
-        </p>
-        <div class="container table-responsive fs-5">
-          <table class="table table-bordered">
-            <thead class="table-light">
-              <tr>
-                <th scope="col" colspan="2">Доходы</th>
-                <th scope="col" colspan="2">Расходы</th>
-              </tr>
-              <tr>
-                <th scope="col">Название</th>
-                <th scope="col">Сумма, руб.</th>
-                <th scope="col">Название</th>
-                <th scope="col">Сумма, руб.</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Оклад</td>
-                <td>
-                  <CalculationParameter
-                  v-model="parameterList[29].number" /> 
-                </td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Надбавка за стаж работы в указанной местности</td>
-                <td class="p-0">
-                  <table class="table table-borderless mb-0">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <CalculationParameter
-                          v-model="parameterList[30].number" />
-                        </td>
-                        <td>
-                          {{ Math.round(parameterList[29].number * parameterList[30].number) }}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Районный коэффициент</td>
-                <td class="p-0">
-                  <table class="table table-borderless mb-0">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <CalculationParameter
-                          v-model="parameterList[31].number" />
-                        </td>
-                        <td>
-                          {{ Math.round(parameterList[29].number * parameterList[31].number) }}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th>Все доходы</th>
-                <td>
-                  {{ Math.round(parameterList[29].number * (1 + parameterList[30].number + parameterList[31].number)) }}
-                </td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th></th>
-                <td></td>
-                <td>НДФЛ</td>
-                <td>
-                  {{ Math.round((parameterList[29].number * (1 + parameterList[30].number + parameterList[31].number)) * 0.13) }}
-                </td>
-              </tr>
-              <tr>
-                <th></th>
-                <td></td>
-                <td>Отчисления во внебюджетные фонды</td>
-                <td>
-                  {{ Math.round((parameterList[29].number * (1 + parameterList[30].number + parameterList[31].number)) * 0.3) }}
-                </td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <th>Итог</th>
-                <td colspan="3">
-                  {{ Math.round((parameterList[29].number * (1 + parameterList[30].number + parameterList[31].number)) * 1.43) }}
-                </td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-        <div class="row align-items-center">
-          <div class="container mx-4 p-0 fs-5 col-4"><p>
-            Длительность опытной эксплуатации
-          </p></div>
-          <div class="container fs-5 col-2">
-            <CalculationParameter
-              v-model="parameterList[32].number" />
-          </div>
-        </div>
-        <div class="container fs-5 text-wrap">
-          К<sub>оэ</sub> = 
-          ({{ this.parameterList[29].number }} * ( 1 +
-          {{ this.parameterList[30].number }} + 
-          {{ this.parameterList[31].number }})) * 1.43 * 
-          {{ parameterList[32].number }} = 
-          {{ Math.round(Trial_operation_costs) }} руб.
-        </div>
-      </div>
-      <div class="container m-4">
-        <p class="h4">
-          К = 
-          {{ parameterList[16].number }} + 
-          {{ parameterList[20].number }} + 
-          {{ parameterList[21].number }} + 
-          {{ parameterList[22].number }} + 
-          {{ parameterList[23].number }} + 
-          {{ parameterList[24].number }} + 
-          {{ parameterList[33].number }} = 
-          {{ Capital_expenditures }}
-        </p>
-      </div>
-      </div>
-      <div class="container d-flex flex-column m-4 shadow rounded-3 overflow-scroll" id="scrollspyHeading3">
+      <div class="d-flex flex-column m-4 shadow rounded-3" id="scrollspyHeading3">
         <div class="h2 m-4">
           Эксплуатационные затраты
         </div>
-        <button class="btn btn-primary fs-5 m-4 me-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOperatingCosts" aria-expanded="false" aria-controls="collapseOperatingCosts">
+        <button class="btn btn-primary fs-5 m-4 me-auto w-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOperatingCosts" aria-expanded="false" aria-controls="collapseOperatingCosts">
             Показать пояснения
           </button>
-        <div class="container fs-5 m-4 cpllapse text-wrap" id="collapseOperatingCosts">
+        <div class="col fs-5 m-4 collapse text-wrap" id="collapseOperatingCosts">
           Расчет эксплуатационных затрат проводится по следующей формуле<br>
           <br>
           С = С<sub>зп</sub> + С<sub>ао</sub> + С<sub>то</sub> + С<sub>лс</sub> + С<sub>ни</sub> + С<sub>проч</sub>,<br>
@@ -1118,9 +1157,9 @@ export default {
           С<sub>ни</sub> – затраты на носители информации;<br>
           С<sub>проч</sub> – прочие затраты.<br>
         </div>
-        <div class="container m-4">
+        <div class="col p-4">
           <p class="h4">С<sub>зп</sub></p>
-          <div class="container table-responsive fs-5">
+          <div class="table-responsive fs-5">
             <table class="table table-bordered">
               <thead class="table-light">
                 <tr>
@@ -1220,10 +1259,10 @@ export default {
             </table>
           </div>
           <div class="row align-items-center">
-            <div class="container mx-4 p-0 fs-5 col-4"><p>
+            <div class="col mx-4 p-0 fs-5 col-4"><p>
               Количество часов
             </p></div>
-            <div class="container fs-5 col-2">
+            <div class="col fs-5 col-2">
               <CalculationParameter
                 v-model="parameterList[39].number" />
             </div>
@@ -1232,25 +1271,25 @@ export default {
             С<sub>зп</sub> = {{ parameterList[38].number * parameterList[39].number / 40 }} руб.
           </div>
         </div>
-        <div class="container m-4">
+        <div class="col p-4">
           <p class="h4">С<sub>ао</sub></p>
           <div class="row align-items-center">
-            <div class="container mx-4 p-0 fs-5 col-4"><p>Стоимость оборудования</p></div>
-            <div class="container fs-5 col-2">
+            <div class="col mx-4 p-0 fs-5 col-4"><p>Стоимость оборудования</p></div>
+            <div class="col fs-5 col-2">
               <CalculationParameter
                 v-model="parameterList[40].number" />
             </div>
           </div>
           <div class="row align-items-center">
-            <div class="container mx-4 p-0 fs-5 col-4"><p>Количество часов эксплуатации оборудования</p></div>
-            <div class="container fs-5 col-2">
+            <div class="col mx-4 p-0 fs-5 col-4"><p>Количество часов эксплуатации оборудования</p></div>
+            <div class="col fs-5 col-2">
               <CalculationParameter
                 v-model="parameterList[41].number" />
             </div>
           </div>
           <div class="row align-items-center">
-            <div class="container mx-4 p-0 fs-5 col-4"><p>Срок службы оборудования</p></div>
-            <div class="container fs-5 col-2">
+            <div class="col mx-4 p-0 fs-5 col-4"><p>Срок службы оборудования</p></div>
+            <div class="col fs-5 col-2">
               <CalculationParameter
                 v-model="parameterList[42].number" />
             </div>
@@ -1265,72 +1304,72 @@ export default {
             А<sub>эксп</sub> = {{ Depreciation_deductions }} руб.
           </div>
         </div>
-        <div class="container m-4">
+        <div class="col p-4">
           <p class="h4">
             С<sub>то</sub>
           </p>
           <div class="row align-items-center">
-            <div class="container mx-4 p-0 fs-5 col-4"><p>
+            <div class="col mx-4 p-0 fs-5 col-4"><p>
               Затраты на техническое обслуживание
             </p></div>
-            <div class="container fs-5 col-2">
+            <div class="col fs-5 col-2">
               <CalculationParameter
                 v-model="parameterList[44].number" />
             </div>
           </div>
         </div>
-        <div class="container m-4">
+        <div class="col p-4">
           <p class="h4">
             С<sub>лс</sub>
           </p>
           <div class="row align-items-center">
-            <div class="container mx-4 p-0 fs-5 col-4"><p>
+            <div class="col mx-4 p-0 fs-5 col-4"><p>
               Затраты на использование глобальных сетей
             </p></div>
-            <div class="container fs-5 col-2">
+            <div class="col fs-5 col-2">
               <CalculationParameter
                 v-model="parameterList[45].number" />
             </div>
           </div>
         </div>
-        <div class="container m-4">
+        <div class="col p-4">
           <p class="h4">
             С<sub>ни</sub>
           </p>
           <div class="row align-items-center">
-            <div class="container mx-4 p-0 fs-5 col-4"><p>
+            <div class="col mx-4 p-0 fs-5 col-4"><p>
               Затраты на носители информации
             </p></div>
-            <div class="container fs-5 col-2">
+            <div class="col fs-5 col-2">
               <CalculationParameter
                 v-model="parameterList[46].number" />
             </div>
           </div>
         </div>
-        <div class="container m-4">
+        <div class="col p-4">
           <p class="h4">С<sub>проч</sub></p>
           <div class="row align-items-center">
-            <div class="container mx-4 p-0 fs-5 col-4"><p>
+            <div class="col mx-4 p-0 fs-5 col-4"><p>
               Прочие расходы связаны с неучтенными затратами, 
               включающими электроэнергию, администрирование, 
               обслуживание сервера и другие статьи затрат не подлежащие точному учету.<br>
               Рекомендуется 3-5%.
             </p></div>
-            <div class="container fs-5 col-2">
+            <div class="col fs-5 col-2">
               <CalculationParameter
                 v-model="parameterList[47].number" />
             </div>
           </div>
           <div class="row align-items-center">
-            <div class="container mx-4 p-0 fs-5 col-4">
+            <div class="col mx-4 p-0 fs-5 col-4">
               Прочие затраты
             </div>
-            <div class="container fs-5 col-2">
+            <div class="col fs-5 col-2">
               С<sub>проч</sub> = {{ Other_costs }} руб.
             </div>
           </div>
         </div>
-        <div class="container m-4">
+        <div class="col p-4">
           <p class="h4">
             С = 
             {{ parameterList[38].number * parameterList[39].number / 40 }} + 
@@ -1343,14 +1382,14 @@ export default {
           </p>
         </div>
       </div>
-      <div class="container d-flex flex-column m-4 shadow rounded-3 overflow-scroll" id="scrollspyHeading4">
+      <div class="d-flex flex-column m-4 shadow rounded-3" id="scrollspyHeading4">
         <div class="h2 m-4">
           Совокупная стоимость владения
         </div>
-        <button class="btn btn-primary fs-5 m-4 me-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTCO" aria-expanded="false" aria-controls="collapseTCO">
+        <button class="btn btn-primary fs-5 m-4 me-auto w-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTCO" aria-expanded="false" aria-controls="collapseTCO">
           Показать пояснения
         </button>
-        <div class="container m-4 fs-5 text-wrap collapse" id="collapseTCO">
+        <div class="col p-4 fs-5 text-wrap collapse" id="collapseTCO">
           Показатель совокупной стоимости владения ИС рассчитывается по формуле<br>
           <br>
           TCO = DE + IC1 + IC2,<br>
@@ -1373,18 +1412,18 @@ export default {
           Косвенные расходы первой группы IC1 – это расходы на компенсацию недостатков системы, вызванных ошибками проектирования.<br>
           Косвенные расходы второй группы IC2 – это расходы на компенсацию недостатков в организации функционирования информационной системы.<br>
         </div>
-        <div class="container m-4">
-          <p class="h4">
+        <div class="row px-4">
+          <p class="h4 px-4">
             DE1 = {{ parameterList[34].number }} руб.
           </p>
         </div>
-        <div class="container m-4">
-          <p class="h4">
+        <div class="row px-4">
+          <p class="h4 px-4">
             DE2 = {{ parameterList[38].number * parameterList[39].number / 40 }} руб.
           </p>
         </div>
-        <div class="container m-4">
-          <p class="h4">
+        <div class="row px-4">
+          <p class="h4 px-4">
             DE3 = {{ parameterList[43].number + parameterList[44].number }} руб.
           </p>
         </div>
@@ -1392,7 +1431,7 @@ export default {
           <div class="container mx-4 p-0 h4 col-4"><p>
             DE4
           </p></div>
-          <div class="container fs-5 col-2">
+          <div class="col fs-5 col-2">
             <CalculationParameter
               v-model="parameterList[50].number" />
           </div>
@@ -1401,7 +1440,7 @@ export default {
           <div class="container mx-4 p-0 h4 col-4"><p>
             DE5
           </p></div>
-          <div class="container fs-5 col-2">
+          <div class="col fs-5 col-2">
             <CalculationParameter
               v-model="parameterList[51].number" />
           </div>
@@ -1410,7 +1449,7 @@ export default {
           <div class="container mx-4 p-0 h4 col-4"><p>
             DE6
           </p></div>
-          <div class="container fs-5 col-2">
+          <div class="col fs-5 col-2">
             <CalculationParameter
               v-model="parameterList[52].number" />
           </div>
@@ -1419,7 +1458,7 @@ export default {
           <div class="container mx-4 p-0 h4 col-4"><p>
             DE7
           </p></div>
-          <div class="container fs-5 col-2">
+          <div class="col fs-5 col-2">
             <CalculationParameter
               v-model="parameterList[53].number" />
           </div>
@@ -1429,15 +1468,15 @@ export default {
             DE8<br>
             Рекомендуется 3-5%.
           </p></div>
-          <div class="container fs-5 col-2">
+          <div class="col fs-5 col-2">
             <CalculationParameter
               v-model="parameterList[54].number" />
           </div>
         </div>
         <div class="row px-4 align-items-center">
-          <div class="container mx-4 p-0 fs-5 col-4">
+          <div class="col mx-4 p-0 fs-5 col-4">
           </div>
-          <div class="container fs-5 col-2">
+          <div class="col fs-5 col-2">
             DE8 = {{ Other_expense_groups }} руб.
           </div>
         </div>
@@ -1445,7 +1484,7 @@ export default {
           <div class="container mx-4 p-0 h4 col-4"><p>
             IC1.
           </p></div>
-          <div class="container fs-5 col-2">
+          <div class="col fs-5 col-2">
             <CalculationParameter
               v-model="parameterList[56].number" />
           </div>
@@ -1454,32 +1493,32 @@ export default {
           <div class="container mx-4 p-0 h4 col-4"><p>
             IC2.
           </p></div>
-          <div class="container fs-5 col-2">
+          <div class="col fs-5 col-2">
             <CalculationParameter
               v-model="parameterList[57].number" />
           </div>
         </div>
-        <div class="container m-4">
+        <div class="col p-4">
           <p class="h4">
             TCO = {{ TCO }} руб.
           </p>
         </div>
       </div>
-      <div class="container m-4 p-2 shadow rounded-3 overflow-scroll" >
-        <button class="btn btn-primary fs-5 m-4" type="button" v-on:click="Download_csv">
+      <div class="d-flex flex-column m-4 p-2 shadow rounded-3" >
+        <button class="btn btn-primary fs-5 m-4 me-auto w-auto" type="button" v-on:click="Download_csv">
           Скачать CSV
         </button>
-        <div class="container m-4 p-2">
+        <div class="col align-content-center m-4 p-2">
           <div 
-            class="dropzone container w-50 border rounded-3 shadow bg-light d-flex flex-column align-items-center"
+            class="dropzone border rounded-3 shadow bg-light d-flex flex-column align-items-center"
             @dragenter.prevent="toggleActive" 
             @dragleave.prevent="toggleActive"
             @dragover.prevent
             @drop.prevent="drop"
             v-bind:class="{'active-dropzone': active}" >
-            <div class="text-wrap w-auto fs-5">Для загрузки файлов перетащите их сюда</div>
+            <div class="text-center text-wrap w-auto fs-5">Для загрузки файлов перетащите их сюда</div>
             <div class="fs-5">ИЛИ</div>
-            <label class="btn btn-primary p-2 fs-5" for="dropzoneFile">Выберите файл</label>
+            <label class="btn btn-primary fs-5 m-4 mx-auto w-auto" for="dropzoneFile">Выберите файл</label>
             <input 
                 class="dropzoneFile d-none" 
                 type="file" 
@@ -1491,7 +1530,7 @@ export default {
           </div>
         </div>
       </div>
-      <div class="container">
+      <div class="p-4">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
           <p class="col-md-4 fs-5 mb-0 text-muted">2023 Хакасский технический институт – филиал федерального государственного автономного образовательного учреждения высшего образования «Сибирский федеральный университет»</p>
 
@@ -1516,6 +1555,9 @@ export default {
 .active-dropzone label {
   border-color:  #D13C16 !important;
   background-color: #FF6000 !important;
+}
+p{
+  word-wrap: break-word;
 }
 </style>
 
