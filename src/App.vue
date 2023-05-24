@@ -485,6 +485,9 @@ export default {
       ["Длительность опытной эксплуатации", this.parameterList[32].number],
       ["Коэ", this.Trial_operation_costs],
       ["К", this.Capital_expenditures],
+      ["Оклад эксплуатационный", this.parameterList[35].number],
+      ["Надбавка эксплуатационная", this.parameterList[36].number],
+      ["Районный коэффициент эксплуатационный", this.parameterList[37].number],
       ["Зарплата эксплуатационная", this.parameterList[38].number],
       ["Часы эксплуатационные", this.parameterList[39].number],
       ["Сзп", this.parameterList[38].number * this.parameterList[39].number / 40],
@@ -551,6 +554,13 @@ export default {
                 self.parameterList[30].number = results.data[32][1];
                 self.parameterList[31].number = results.data[33][1];
                 self.parameterList[32].number = results.data[34][1];
+                self.parameterList[33].number = results.data[35][1];
+                self.parameterList[35].number = results.data[37][1];
+                self.parameterList[36].number = results.data[38][1];
+                self.parameterList[37].number = results.data[39][1];
+                self.parameterList[38].number = results.data[40][3];
+                self.parameterList[39].number = results.data[41][3];
+
               }
           });
       }
@@ -604,37 +614,39 @@ export default {
   </nav>
   <div data-bs-spy="scroll" data-bs-target="#offcanvasNavbar2" data-bs-offset="0" tabindex="0" class="container-fluid d-flex flex-column align-items-center p-0 m-0 position-relative">
     <div class="container position-relative p-0 m-0 mt-5">
-      <div class="d-flex flex-column m-4 shadow rounded-3" id="scrollspyHeading1">
+      <div class="d-flex flex-column m-4 shadow rounded-3 mt-5" id="scrollspyHeading1">
         <div class="row h2 m-4">
           Методика ТСО
         </div>
         <button class="btn btn-primary fs-5 m-4 me-auto w-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExplanations" aria-expanded="false" aria-controls="collapseExplanations">
           Показать пояснения
         </button>
-        <div class="collapse row m-0 p-4 justify-content-center" id="collapseExplanations">
-          <div class="introduction row fs-5 text-wrap">
-            Методика ТСО (Total cost of ownership — совокупная стоимость владения) разработана в конце 80-х компанией Gartner Group 
-            для определения финансовых затрат на владение компьютерами. 
-            Методика была усовершенствована в 1994 г. фирмой Intepose и переработана в полноценную модель анализа 
-            финансовой стороны использования информационных технологий. 
-            Впервые термин «совокупная стоимость» владения (Total Cost of Ownership – ТСО) был введен Полем Страссманом. 
-            Под ТСО он понимал денежные затраты на обслуживание, модернизацию, ремонт, приобретение новых программных продуктов для 
-            технического средства (например, компьютера), или поддержание в рабочем состоянии программного продукта (например, базы данных) 
-            за все предполагаемое или фактическое время его существования.
-            Цель применения методики ТСО – получить картину, которая отражала бы реальные затраты, связанные с приобретением определенных 
-            средств и технологий, и учитывала все аспекты их последующего использования.
-          </div>
-          <div class="row row-cols-auto row-cols-md-2 g-0 g-md-4" >
-            <div class="col">
-              <div class="border rounded-3 shadow">
-                <img src="src/Images/TCO-Microsoft.png" class="img-fluid p-4" alt="Модель ТСО, разработанная компанией Microsoft совместно с Interpose">
-                <p class="introduction fs-5 text-wrap text-center p-2">Модель ТСО, разработанная компанией Microsoft совместно с Interpose</p>
-              </div>
+        <div class="row collapse" id="collapseExplanations">
+          <div class="row m-0 p-4 justify-content-center">
+            <div class="introduction row fs-5 text-wrap">
+              Методика ТСО (Total cost of ownership — совокупная стоимость владения) разработана в конце 80-х компанией Gartner Group 
+              для определения финансовых затрат на владение компьютерами. 
+              Методика была усовершенствована в 1994 г. фирмой Intepose и переработана в полноценную модель анализа 
+              финансовой стороны использования информационных технологий. 
+              Впервые термин «совокупная стоимость» владения (Total Cost of Ownership – ТСО) был введен Полем Страссманом. 
+              Под ТСО он понимал денежные затраты на обслуживание, модернизацию, ремонт, приобретение новых программных продуктов для 
+              технического средства (например, компьютера), или поддержание в рабочем состоянии программного продукта (например, базы данных) 
+              за все предполагаемое или фактическое время его существования.
+              Цель применения методики ТСО – получить картину, которая отражала бы реальные затраты, связанные с приобретением определенных 
+              средств и технологий, и учитывала все аспекты их последующего использования.
             </div>
-            <div class="col">
-              <div class="align-self-center h-auto border rounded-3 shadow">
-                <img src="src/Images/TCO-GartnerGroup.png" class="img-fluid p-4" alt="Модель TCO, предложенная Gartner Group">
-                <p class="introduction fs-5 text-wrap text-center p-2">Модель TCO, предложенная Gartner Group</p>
+            <div class="row row-cols-auto row-cols-md-2 g-0 g-md-4" >
+              <div class="col">
+                <div class="border rounded-3 shadow">
+                  <img src="src/Images/TCO-Microsoft.png" class="img-fluid p-4" alt="Модель ТСО, разработанная компанией Microsoft совместно с Interpose">
+                  <p class="introduction fs-5 text-wrap text-center p-2">Модель ТСО, разработанная компанией Microsoft совместно с Interpose</p>
+                </div>
+              </div>
+              <div class="col">
+                <div class="align-self-center h-auto border rounded-3 shadow">
+                  <img src="src/Images/TCO-GartnerGroup.png" class="img-fluid p-4" alt="Модель TCO, предложенная Gartner Group">
+                  <p class="introduction fs-5 text-wrap text-center p-2">Модель TCO, предложенная Gartner Group</p>
+                </div>
               </div>
             </div>
           </div>
@@ -647,28 +659,28 @@ export default {
         <button class="btn btn-primary fs-5 m-4 me-auto w-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCapitalExpenditures" aria-expanded="false" aria-controls="collapseCapitalExpenditures">
           Показать пояснения
         </button>
-        <div class="row p-4 collapse fs-5 text-wrap" id="collapseCapitalExpenditures">
-          <div class="col">
+        <div class="row collapse" id="collapseCapitalExpenditures">
+          <div class="col p-4 fs-5 text-wrap">
             Капитальные затраты на разработку информационной системы вычисляются по формуле<br>
-          <br>
-          К = К<sub>пр</sub> + К<sub>тс</sub> + К<sub>лс</sub> + К<sub>по</sub> + К<sub>ио</sub> + К<sub>об</sub> + К<sub>оэ</sub>,<br>
-          <br>
-          где К<sub>пр</sub> – затраты на проектирование ИС;<br>
-          К<sub>тс</sub> – затраты на технические средства управления;<br>
-          К<sub>лс</sub> – затраты на создание линий связи локальных сетей; <br>
-          К<sub>по</sub> – затраты на программные средства;<br>
-          К<sub>ио</sub> – затраты на формирование информационной базы; <br>
-          К<sub>об</sub> – затраты на обучение персонала;<br>
-          К<sub>оэ</sub> – затраты на опытную эксплуатацию.<br>
-          Одной из ключевых частей капитальных затрат являются затраты на проектирование информационной системы, также называемые затратами на разработку.<br>
-          Затраты на разработку рассчитываются по формуле<br>
-          <br>
-          К<sub>пр</sub> = К<sub>зп</sub> + К<sub>ипс</sub> + К<sub>свт</sub> + К<sub>проч</sub>,<br>
-          <br>
-          где К<sub>зп</sub> – затраты на заработную плату проектировщиков;<br>
-          К<sub>ипс</sub> – затраты на инструментальные программные средства; <br>
-          К<sub>свт</sub> – затраты на средства вычислительной техники;<br>
-          К<sub>проч</sub> – прочие затраты на проектирование.<br>
+            <br>
+            К = К<sub>пр</sub> + К<sub>тс</sub> + К<sub>лс</sub> + К<sub>по</sub> + К<sub>ио</sub> + К<sub>об</sub> + К<sub>оэ</sub>,<br>
+            <br>
+            где К<sub>пр</sub> – затраты на проектирование ИС;<br>
+            К<sub>тс</sub> – затраты на технические средства управления;<br>
+            К<sub>лс</sub> – затраты на создание линий связи локальных сетей; <br>
+            К<sub>по</sub> – затраты на программные средства;<br>
+            К<sub>ио</sub> – затраты на формирование информационной базы; <br>
+            К<sub>об</sub> – затраты на обучение персонала;<br>
+            К<sub>оэ</sub> – затраты на опытную эксплуатацию.<br>
+            Одной из ключевых частей капитальных затрат являются затраты на проектирование информационной системы, также называемые затратами на разработку.<br>
+            Затраты на разработку рассчитываются по формуле<br>
+            <br>
+            К<sub>пр</sub> = К<sub>зп</sub> + К<sub>ипс</sub> + К<sub>свт</sub> + К<sub>проч</sub>,<br>
+            <br>
+            где К<sub>зп</sub> – затраты на заработную плату проектировщиков;<br>
+            К<sub>ипс</sub> – затраты на инструментальные программные средства; <br>
+            К<sub>свт</sub> – затраты на средства вычислительной техники;<br>
+            К<sub>проч</sub> – прочие затраты на проектирование.<br>
           </div>
         </div>
         <div class="row p-4">
@@ -775,10 +787,13 @@ export default {
         </div>
         <div class="row p-4">
           <p class="h4">К<sub>ипс</sub></p>
-          <button class="btn btn-primary fs-5 me-auto w-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDepreciation" aria-expanded="false" aria-controls="collapseDepreciation">
-            Показать пояснения
-          </button>
-          <div class="col p-4 collapse fs-5 text-wrap" id="collapseDepreciation">
+          <div class="row p-4">
+            <button class="btn btn-primary fs-5 me-auto w-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDepreciation" aria-expanded="false" aria-controls="collapseDepreciation">
+              Показать пояснения
+            </button>
+          </div>
+          <div class="row collapse" id="collapseDepreciation">
+            <div class="col p-4 fs-5 text-wrap" >
             Амортизация рассчитывается по формуле<br>
             <br>
             А<sub>год</sub> = С<sub>б</sub> ∙ Н<sub>ам</sub>,<br>
@@ -799,6 +814,7 @@ export default {
             Н<sub>ам</sub> = 100% / Тэк,<br>
             <br>
             где Т<sub>эк</sub> – срок эксплуатации компьютера.<br>
+            </div>
           </div>
           <div class="row align-items-center">
             <div class="col mx-4 p-0 fs-5 col-4"><p>Стоимость ПК для разработки</p></div>
@@ -1142,10 +1158,13 @@ export default {
         <div class="h2 m-4">
           Эксплуатационные затраты
         </div>
-        <button class="btn btn-primary fs-5 m-4 me-auto w-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOperatingCosts" aria-expanded="false" aria-controls="collapseOperatingCosts">
+        <div class="row p-4">
+          <button class="btn btn-primary ms-2 fs-5 me-auto w-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOperatingCosts" aria-expanded="false" aria-controls="collapseOperatingCosts">
             Показать пояснения
           </button>
-        <div class="col fs-5 m-4 collapse text-wrap" id="collapseOperatingCosts">
+        </div>
+        <div class="row p-0 m-0 collapse" id="collapseOperatingCosts">
+          <div class="col fs-5 m-4 text-wrap">
           Расчет эксплуатационных затрат проводится по следующей формуле<br>
           <br>
           С = С<sub>зп</sub> + С<sub>ао</sub> + С<sub>то</sub> + С<sub>лс</sub> + С<sub>ни</sub> + С<sub>проч</sub>,<br>
@@ -1156,7 +1175,9 @@ export default {
           С<sub>лс</sub> – затраты на использование глобальных сетей;<br>
           С<sub>ни</sub> – затраты на носители информации;<br>
           С<sub>проч</sub> – прочие затраты.<br>
+          </div>
         </div>
+        
         <div class="col p-4">
           <p class="h4">С<sub>зп</sub></p>
           <div class="table-responsive fs-5">
@@ -1389,7 +1410,8 @@ export default {
         <button class="btn btn-primary fs-5 m-4 me-auto w-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTCO" aria-expanded="false" aria-controls="collapseTCO">
           Показать пояснения
         </button>
-        <div class="col p-4 fs-5 text-wrap collapse" id="collapseTCO">
+        <div class="row collapse" id="collapseTCO">
+          <div class="col m-4 p-4 fs-5 text-wrap">
           Показатель совокупной стоимости владения ИС рассчитывается по формуле<br>
           <br>
           TCO = DE + IC1 + IC2,<br>
@@ -1411,6 +1433,7 @@ export default {
           DE8 – другие группы расходов. <br>
           Косвенные расходы первой группы IC1 – это расходы на компенсацию недостатков системы, вызванных ошибками проектирования.<br>
           Косвенные расходы второй группы IC2 – это расходы на компенсацию недостатков в организации функционирования информационной системы.<br>
+          </div>
         </div>
         <div class="row px-4">
           <p class="h4 px-4">
