@@ -1,14 +1,16 @@
 <script>
 import CalculationParameter from './components/CalculationParameter.vue';
+import CanvasJSChart from './components/CanvasJSVueComponent.vue';
 export default {
   mounted() {
     // Инициализация Scrollspy
     const scrollSpy = new bootstrap.ScrollSpy(document.body, {
       target: '#navbar-tco'
-    })
+    });
   },
   components: {
     CalculationParameter,
+    CanvasJSChart
   },
   data() {
     return {
@@ -253,6 +255,26 @@ export default {
 
       dropzoneFile: '', // Store our uploaded files
       active: false,
+
+      chart: null,
+      options: {
+        animationEnabled: true,
+        title:{
+          text: "Проектные затраты"
+        },
+        data: [{
+          type: "pie",
+          dataPoints: [] // Empty array to be populated dynamically
+        }]
+      }
+    }
+  },
+  watch: {
+    parameterList: {
+      deep: true,
+      handler() {
+        this.generateDataPoints();
+      }
     }
   },
   computed: {
@@ -574,6 +596,38 @@ export default {
     toggleActive() {
       this.active = !this.active;
       return false;
+    },
+
+    generateDataPoints() {
+      let dps = [
+        {
+          y: this.parameterList[6].number,
+          name: this.parameterList[6].parameterName,
+          indexLabel: (this.parameterList[6].number / this.parameterList[16].number * 100) + "%"
+        },
+        {
+          y: this.parameterList[11].number,
+          name: this.parameterList[11].parameterName,
+          indexLabel: (this.parameterList[11].number / this.parameterList[16].number * 100) + "%"
+        },
+        {
+          y: this.parameterList[13].number,
+          name: this.parameterList[13].parameterName,
+          indexLabel: (this.parameterList[13].number / this.parameterList[16].number * 100) + "%"
+        },
+        {
+          y: this.parameterList[15].number,
+          name: this.parameterList[15].parameterName,
+          indexLabel: (this.parameterList[15].number / this.parameterList[16].number * 100) + "%"
+        }
+      ];
+
+      this.options.data[0].dataPoints = dps;
+      this.chart.render();
+    },
+    chartInstance(chart) {
+      this.chart = chart;
+      this.generateDataPoints();
     }
   }
 }
@@ -890,6 +944,9 @@ export default {
             {{ Design_costs }}
           </p>
         </div>
+      </div>
+      <div class="d-flex flex-column m-4 shadow rounded-3">
+        <CanvasJSChart :options="options" @chart-ref="chartInstance"/>
       </div>
       <div class="d-flex flex-column m-4 shadow rounded-3" id="scrollspyHeading2">
         <div class="h2 m-4">

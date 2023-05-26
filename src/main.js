@@ -5,6 +5,7 @@ import './assets/bootstrap.css'
 import './bootstrap.js'
 import './assets/calc.css'
 import './download-csv.js'
+import './canvasjs.min.js'
 import VuePapaParse from 'vue-papa-parse'
 
 const app = createApp(App)
