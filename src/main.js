@@ -1,13 +1,17 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import router from './router'
 
 import './assets/bootstrap.css'
 import './bootstrap.js'
-import './assets/calc.css'
 import './download-csv.js'
-import './canvasjs.min.js'
 import VuePapaParse from 'vue-papa-parse'
 
-const app = createApp(App)
+import '../node_modules/font-awesome/css/font-awesome.min.css';
+
+
+
+let app = createApp(App)
+app.use(router)
 app.use(VuePapaParse)
 app.mount('#app')
