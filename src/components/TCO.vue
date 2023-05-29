@@ -1803,29 +1803,31 @@ export default {
             <div class="fileInfo fs-5">Файл: {{ dropzoneFile.name }}</div>
           </div>
         </div>
-    </div>
-    <div class="p-4">
-      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <p class="col-md-4 fs-5 mb-0 text-muted">2023 Хакасский технический институт – филиал федерального
-          государственного автономного образовательного учреждения высшего образования «Сибирский федеральный
-          университет»</p>
+      </div>
+      <div class="p-4">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+          <p class="col-md-4 fs-5 mb-0 text-muted">2023 Хакасский технический институт – филиал федерального
+            государственного автономного образовательного учреждения высшего образования «Сибирский федеральный
+            университет»</p>
 
-        <a href="/"
-          class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-          <svg class="bi me-2" width="40" height="32">
-            <use xlink:href="#bootstrap"></use>
-          </svg>
-        </a>
+          <a href="/"
+            class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32">
+              <use xlink:href="#bootstrap"></use>
+            </svg>
+          </a>
 
-        <ul class="nav col-md-4 justify-content-end">
-          <li class="nav-item fs-5"><a href="#" class="nav-link px-2 text-muted">Наверх</a></li>
-        </ul>
-      </footer>
+          <ul class="nav col-md-4 justify-content-end">
+            <li class="nav-item fs-5"><a href="#" class="nav-link px-2 text-muted">Наверх</a></li>
+          </ul>
+        </footer>
+      </div>
     </div>
   </div>
-</div></template>
+</template>
 
-<style>.active-dropzone {
+<style>
+.active-dropzone {
   background-color: var(--bs-gray-200) !important;
 }
 
@@ -1836,5 +1838,6 @@ export default {
 
 p {
   word-wrap: break-word;
-}</style>
+}
+</style>
 
