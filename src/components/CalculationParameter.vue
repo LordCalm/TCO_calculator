@@ -6,14 +6,11 @@ export default {
 </script>
 
 <template>
-    <input
-        :value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
-    />
+    <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
 </template>
 
 <style scoped>
-input{
-    width: 80px;
+input {
+    width: 100%;
 }
 </style>

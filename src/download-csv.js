@@ -38,3 +38,5 @@ function exportToCsv(filename, rows) {
         }
     }
 }
+
+export { exportToCsv };

@@ -1,6 +1,7 @@
 <script>
 import CalculationParameter from './CalculationParameter.vue';
 import CanvasJSChart from '../assets/CanvasJSVueComponent.vue';
+import { exportToCsv } from '../download-csv.js';
 export default {
   mounted() {
     // Инициализация Scrollspy
@@ -321,191 +322,191 @@ export default {
   },
   computed: {
     District_coefficient() {
-      return Math.round(this.parameterList[0].number) *
-        Math.round(this.parameterList[2].number);
+      return Math.round(Number(this.parameterList[0].number) *
+        Number(this.parameterList[2].number));
     },
     All_income() {
       this.parameterList[3].number =
-        Math.round(this.parameterList[0].number * (1 + this.parameterList[2].number)) +
-        Math.round(Math.round(this.parameterList[0].number) * Math.round(this.parameterList[1].number));
+        Math.round(Number(this.parameterList[0].number * (1 + this.parameterList[2].number)) +
+          Number(Number(this.parameterList[0].number) * Number(this.parameterList[1].number)));
       return this.parameterList[3].number;
     },
     Income_tax() {
-      this.parameterList[4].number = Math.round(Math.round(this.parameterList[3].number) * 0.13);
+      this.parameterList[4].number = Math.round(Number(this.parameterList[3].number) * 0.13);
       return this.parameterList[4].number;
     },
     Fund_allocations() {
-      this.parameterList[5].number = Math.round(this.parameterList[3].number) * 0.3;
+      this.parameterList[5].number = Math.round(Number(this.parameterList[3].number) * 0.3);
       return this.parameterList[5].number;
     },
     Programmer_salary() {
       this.parameterList[6].number =
-        Math.round(this.parameterList[3].number) +
-        Math.round(this.parameterList[4].number) +
-        Math.round(this.parameterList[5].number);
+        Math.round(Number(this.parameterList[3].number) +
+          Number(this.parameterList[4].number) +
+          Number(this.parameterList[5].number));
       return this.parameterList[6].number;
     },
     Depreciation_rate() {
       this.parameterList[9].number = Math.round(100 /
-        Math.round(this.parameterList[12].number));
+        Number(this.parameterList[12].number));
       return this.parameterList[9].number;
     },
     Depreciation_per_year() {
       this.parameterList[10].number =
-        Math.round(Math.round(this.parameterList[7].number) *
-          Math.round(this.parameterList[9].number) / 100);
+        Math.round(Number(this.parameterList[7].number) *
+          Number(this.parameterList[9].number) / 100);
       return this.parameterList[10].number;
     },
     Depreciation_per_project() {
       this.parameterList[11].number =
-        Math.round(Math.round(this.parameterList[10].number) / 247 *
-          Math.round(this.parameterList[8].number));
+        Math.round(Number(this.parameterList[10].number) / 247 *
+          Number(this.parameterList[8].number));
       return this.parameterList[11].number;
     },
     Other_design_costs() {
       this.parameterList[15].number =
-        Math.round(Math.round(this.parameterList[14].number) / 100 *
-          (Math.round(this.parameterList[6].number) +
-            Math.round(this.parameterList[11].number) +
-            Math.round(this.parameterList[13].number)));
+        Math.round(Number(this.parameterList[14].number) / 100 *
+          (Number(this.parameterList[6].number) +
+            Number(this.parameterList[11].number) +
+            Number(this.parameterList[13].number)));
       return this.parameterList[15].number;
     },
     Design_costs() {
       this.parameterList[16].number =
-        Math.round(this.parameterList[6].number) +
-        Math.round(this.parameterList[13].number) +
-        Math.round(this.parameterList[11].number) +
-        Math.round(this.parameterList[15].number);
+        Math.round(Number(this.parameterList[6].number) +
+          Number(this.parameterList[13].number) +
+          Number(this.parameterList[11].number) +
+          Number(this.parameterList[15].number));
       return this.parameterList[16].number;
     },
     Costs_for_technical_controls_1() {
       this.parameterList[19].number =
-        Math.round(Math.round(this.parameterList[10].number) / 247 *
-          Math.round(this.parameterList[17].number));
+        Math.round(Number(this.parameterList[10].number) / 247 *
+          Number(this.parameterList[17].number));
       return this.parameterList[19].number;
     },
     Costs_for_technical_controls_2() {
       this.parameterList[20].number =
-        Math.round(this.parameterList[19].number) +
-        Math.round(this.parameterList[18].number);
+        Math.round(Number(this.parameterList[19].number) +
+          Number(this.parameterList[18].number));
       return this.parameterList[20].number;
     },
     Staff_training_costs() {
       this.parameterList[24].number =
-        Math.round((Math.round(this.parameterList[25].number) * (1 +
-          Math.round(this.parameterList[26].number) +
-          Math.round(this.parameterList[27].number))) * 1.43 *
-          Math.round(this.parameterList[28].number));
+        Math.round((Number(this.parameterList[25].number) * (1 +
+          Number(this.parameterList[26].number) +
+          Number(this.parameterList[27].number))) * 1.43 *
+          Number(this.parameterList[28].number));
       return this.parameterList[24].number;
     },
     Trial_operation_costs() {
       this.parameterList[33].number =
-        Math.round((Math.round(this.parameterList[29].number) * (1 +
-          Math.round(this.parameterList[30].number) +
-          Math.round(this.parameterList[31].number))) * 1.43 *
-          Math.round(this.parameterList[32].number));
+        Math.round((Number(this.parameterList[29].number) * (1 +
+          Number(this.parameterList[30].number) +
+          Number(this.parameterList[31].number))) * 1.43 *
+          Number(this.parameterList[32].number));
       return this.parameterList[33].number;
     },
     Capital_expenditures() {
       this.parameterList[34].number =
-        Math.round(this.parameterList[16].number) +
-        Math.round(this.parameterList[20].number) +
-        Math.round(this.parameterList[21].number) +
-        Math.round(this.parameterList[22].number) +
-        Math.round(this.parameterList[23].number) +
-        Math.round(this.parameterList[24].number) +
-        Math.round(this.parameterList[33].number);
+        Math.round(Number(this.parameterList[16].number) +
+          Number(this.parameterList[20].number) +
+          Number(this.parameterList[21].number) +
+          Number(this.parameterList[22].number) +
+          Number(this.parameterList[23].number) +
+          Number(this.parameterList[24].number) +
+          Number(this.parameterList[33].number));
       return this.parameterList[34].number;
     },
     Surcharge_OC() {
-      return Math.round(this.parameterList[35].number) * (
-        Math.round(this.parameterList[36].number));
+      return Math.round(Number(this.parameterList[35].number) * (
+        Number(this.parameterList[36].number)));
     },
     District_coefficient_OC() {
-      return Math.round(this.parameterList[35].number) * (
-        Math.round(this.parameterList[37].number));
+      return Math.round(Number(this.parameterList[35].number) * (
+        Number(this.parameterList[37].number)));
     },
     All_income_OC() {
-      return Math.round(this.parameterList[35].number) +
-        Math.round(this.parameterList[35].number) * (
-          Math.round(this.parameterList[36].number)) +
-        Math.round(this.parameterList[35].number) * (
-          Math.round(this.parameterList[37].number));
+      return Math.round(Number(this.parameterList[35].number) +
+        Number(this.parameterList[35].number) * (
+          Number(this.parameterList[36].number)) +
+        Number(this.parameterList[35].number) * (
+          Number(this.parameterList[37].number)));
     },
     Income_tax_OC() {
-      return Math.round((Math.round(this.parameterList[35].number) +
-        Math.round(this.parameterList[35].number) *
-        Math.round(this.parameterList[36].number) +
-        Math.round(this.parameterList[35].number) *
-        Math.round(this.parameterList[37].number)) * 0.13);
+      return Math.round((Number(this.parameterList[35].number) +
+        Number(this.parameterList[35].number) *
+        Number(this.parameterList[36].number) +
+        Number(this.parameterList[35].number) *
+        Number(this.parameterList[37].number)) * 0.13);
     },
     Fund_allocations_OC() {
-      return Math.round((Math.round(this.parameterList[35].number) +
-        Math.round(this.parameterList[35].number) *
-        Math.round(this.parameterList[36].number) +
-        Math.round(this.parameterList[35].number) *
-        Math.round(this.parameterList[37].number)) * 0.3);
+      return Math.round((Number(this.parameterList[35].number) +
+        Number(this.parameterList[35].number) *
+        Number(this.parameterList[36].number) +
+        Number(this.parameterList[35].number) *
+        Number(this.parameterList[37].number)) * 0.3);
     },
     Salary_OC() {
       this.parameterList[38].number =
-        Math.round((Math.round(this.parameterList[35].number) +
-          Math.round(this.parameterList[35].number) *
-          Math.round(this.parameterList[36].number) +
-          Math.round(this.parameterList[35].number) *
-          Math.round(this.parameterList[37].number)) * 1.43);
+        Math.round((Number(this.parameterList[35].number) +
+          Number(this.parameterList[35].number) *
+          Number(this.parameterList[36].number) +
+          Number(this.parameterList[35].number) *
+          Number(this.parameterList[37].number)) * 1.43);
       return this.parameterList[38].number;
     },
     Depreciation_deductions() {
       this.parameterList[43].number =
-        Math.round(Math.round(this.parameterList[40].number) *
-          (100 / Math.round(this.parameterList[42].number)) / 100 / 247 / 24 *
-          Math.round(this.parameterList[41].number));
+        Math.round(Number(this.parameterList[40].number) *
+          (100 / Number(this.parameterList[42].number)) / 100 / 247 / 24 *
+          Number(this.parameterList[41].number));
       return this.parameterList[43].number;
     },
     Other_costs() {
       this.parameterList[48].number =
-        Math.round((Math.round(this.parameterList[38].number * this.parameterList[39].number / 40) +
-          Math.round(this.parameterList[43].number) +
-          Math.round(this.parameterList[44].number) +
-          Math.round(this.parameterList[45].number) +
-          Math.round(this.parameterList[46].number)) *
-          Math.round(this.parameterList[47].number) / 100);
+        Math.round((Number(this.parameterList[38].number * this.parameterList[39].number / 40) +
+          Number(this.parameterList[43].number) +
+          Number(this.parameterList[44].number) +
+          Number(this.parameterList[45].number) +
+          Number(this.parameterList[46].number)) *
+          Number(this.parameterList[47].number) / 100);
       return this.parameterList[48].number;
     },
     Operating_costs() {
       this.parameterList[49].number =
-        Math.round(Math.round(this.parameterList[38].number * this.parameterList[39].number / 40) +
-          Math.round(this.parameterList[43].number) +
-          Math.round(this.parameterList[44].number) +
-          Math.round(this.parameterList[45].number) +
-          Math.round(this.parameterList[46].number) +
-          Math.round(this.parameterList[48].number));
+        Math.round(Number(this.parameterList[38].number * this.parameterList[39].number / 40) +
+          Number(this.parameterList[43].number) +
+          Number(this.parameterList[44].number) +
+          Number(this.parameterList[45].number) +
+          Number(this.parameterList[46].number) +
+          Number(this.parameterList[48].number));
       return this.parameterList[49].number;
     },
     Other_expense_groups() {
       this.parameterList[55].number =
-        Math.round((Math.round(this.parameterList[34].number) +
-          Math.round(this.parameterList[38].number * this.parameterList[39].number / 40) +
-          Math.round(this.parameterList[43].number + this.parameterList[44].number) +
-          Math.round(this.parameterList[50].number) +
-          Math.round(this.parameterList[51].number) +
-          Math.round(this.parameterList[52].number) +
-          Math.round(this.parameterList[53].number)) *
-          Math.round(this.parameterList[54].number) / 100);
+        Math.round((Number(this.parameterList[34].number) +
+          Number(this.parameterList[38].number * this.parameterList[39].number / 40) +
+          Number(this.parameterList[43].number + this.parameterList[44].number) +
+          Number(this.parameterList[50].number) +
+          Number(this.parameterList[51].number) +
+          Number(this.parameterList[52].number) +
+          Number(this.parameterList[53].number)) *
+          Number(this.parameterList[54].number) / 100);
       return this.parameterList[55].number;
     },
     TCO() {
       this.parameterList[58].number =
-        Math.round(Math.round(this.parameterList[34].number) +
-          Math.round(this.parameterList[38].number * this.parameterList[39].number / 40) +
-          Math.round(this.parameterList[43].number + this.parameterList[44].number) +
-          Math.round(this.parameterList[50].number) +
-          Math.round(this.parameterList[51].number) +
-          Math.round(this.parameterList[52].number) +
-          Math.round(this.parameterList[53].number) +
-          Math.round(this.parameterList[55].number) +
-          Math.round(this.parameterList[56].number) +
-          Math.round(this.parameterList[57].number));
+        Math.round(Number(this.parameterList[34].number) +
+          Number(this.parameterList[38].number * this.parameterList[39].number / 40) +
+          Number(this.parameterList[43].number + this.parameterList[44].number) +
+          Number(this.parameterList[50].number) +
+          Number(this.parameterList[51].number) +
+          Number(this.parameterList[52].number) +
+          Number(this.parameterList[53].number) +
+          Number(this.parameterList[55].number) +
+          Number(this.parameterList[56].number) +
+          Number(this.parameterList[57].number));
       return this.parameterList[58].number;
     }
   },
@@ -1038,7 +1039,7 @@ export default {
             <div class="col mx-4 p-0 fs-5 col-4">
               <p>Стоимость ПК для разработки</p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[7].number" />
             </div>
           </div>
@@ -1046,7 +1047,7 @@ export default {
             <div class="col mx-4 p-0 fs-5 col-4">
               <p>Количество дней эксплуатации ПК (длительность периода разработки ИС)</p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[8].number" />
             </div>
           </div>
@@ -1054,7 +1055,7 @@ export default {
             <div class="col mx-4 p-0 fs-5 col-4">
               <p>Срок службы ПК</p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[12].number" />
             </div>
           </div>
@@ -1074,7 +1075,7 @@ export default {
             <div class="col mx-4 p-0 fs-5 col-4">
               <p>Затраты на инструментальные программные средства</p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[13].number" />
             </div>
           </div>
@@ -1090,7 +1091,7 @@ export default {
                 Рекомендуется 3-5%.
               </p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[14].number" />
             </div>
           </div>
@@ -1098,7 +1099,7 @@ export default {
             <div class="col mx-4 p-0 fs-5 col-4">
               Прочие затраты на проектирование
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               К<sub>проч</sub> = {{ Other_design_costs }} руб.
             </div>
           </div>
@@ -1125,7 +1126,7 @@ export default {
           <p class="h4">
             К<sub>тс</sub>
           </p>
-          <div class="col fs-5 text-wrap">
+          <div class="col fs-5 col-5 text-wrap">
             Затраты на технические средства управления. Затраты
             на технические средства управления включают в себя стоимость компьютера и серверного ПК.
           </div>
@@ -1135,7 +1136,7 @@ export default {
                 Длительность тестирования и введения в эксплуатацию.
               </p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[17].number" />
             </div>
           </div>
@@ -1145,12 +1146,12 @@ export default {
                 Амортизация серверного ПК (если есть)
               </p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[18].number" />
             </div>
           </div>
           <div class="row">
-            <div class="col fs-5 mx-4 p-0">
+            <div class="col fs-5 col-5 mx-4 p-0">
               К<sub>тс</sub> =
               {{ Costs_for_technical_controls_1 }} +
               {{ parameterList[18].number }} =
@@ -1168,7 +1169,7 @@ export default {
                 Затраты на создание линий связи локальных сетей
               </p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[21].number" />
             </div>
           </div>
@@ -1183,7 +1184,7 @@ export default {
                 Затраты на программные средства
               </p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[22].number" />
             </div>
           </div>
@@ -1198,7 +1199,7 @@ export default {
                 Затраты на формирование информационной базы
               </p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[23].number" />
             </div>
           </div>
@@ -1213,7 +1214,7 @@ export default {
                 Оклад тренера
               </p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[25].number" />
             </div>
           </div>
@@ -1223,7 +1224,7 @@ export default {
                 Надбавка за стаж тренера
               </p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[26].number" />
             </div>
           </div>
@@ -1233,7 +1234,7 @@ export default {
                 Районный коэффициент тренера
               </p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[27].number" />
             </div>
           </div>
@@ -1243,7 +1244,7 @@ export default {
                 Длительность обучения
               </p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[28].number" />
             </div>
           </div>
@@ -1365,7 +1366,7 @@ export default {
                 Длительность опытной эксплуатации
               </p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[32].number" />
             </div>
           </div>
@@ -1406,7 +1407,7 @@ export default {
           </button>
         </div>
         <div class="row p-0 m-0 collapse" id="collapseOperatingCosts">
-          <div class="col fs-5 m-4 text-wrap">
+          <div class="col fs-5 col-5 m-4 text-wrap">
             Расчет эксплуатационных затрат проводится по следующей формуле<br>
             <br>
             С = С<sub>зп</sub> + С<sub>ао</sub> + С<sub>то</sub> + С<sub>лс</sub> + С<sub>ни</sub> + С<sub>проч</sub>,<br>
@@ -1524,7 +1525,7 @@ export default {
                 Количество часов
               </p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[39].number" />
             </div>
           </div>
@@ -1538,7 +1539,7 @@ export default {
             <div class="col mx-4 p-0 fs-5 col-4">
               <p>Стоимость оборудования</p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[40].number" />
             </div>
           </div>
@@ -1546,7 +1547,7 @@ export default {
             <div class="col mx-4 p-0 fs-5 col-4">
               <p>Количество часов эксплуатации оборудования</p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[41].number" />
             </div>
           </div>
@@ -1554,7 +1555,7 @@ export default {
             <div class="col mx-4 p-0 fs-5 col-4">
               <p>Срок службы оборудования</p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[42].number" />
             </div>
           </div>
@@ -1578,7 +1579,7 @@ export default {
                 Затраты на техническое обслуживание
               </p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[44].number" />
             </div>
           </div>
@@ -1593,7 +1594,7 @@ export default {
                 Затраты на использование глобальных сетей
               </p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[45].number" />
             </div>
           </div>
@@ -1608,7 +1609,7 @@ export default {
                 Затраты на носители информации
               </p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[46].number" />
             </div>
           </div>
@@ -1624,7 +1625,7 @@ export default {
                 Рекомендуется 3-5%.
               </p>
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[47].number" />
             </div>
           </div>
@@ -1632,7 +1633,7 @@ export default {
             <div class="col mx-4 p-0 fs-5 col-4">
               Прочие затраты
             </div>
-            <div class="col fs-5 col-2">
+            <div class="col fs-5 col-5">
               С<sub>проч</sub> = {{ Other_costs }} руб.
             </div>
           </div>
@@ -1709,7 +1710,7 @@ export default {
               DE4
             </p>
           </div>
-          <div class="col fs-5 col-2">
+          <div class="col fs-5 col-5">
             <CalculationParameter v-model="parameterList[50].number" />
           </div>
         </div>
@@ -1719,7 +1720,7 @@ export default {
               DE5
             </p>
           </div>
-          <div class="col fs-5 col-2">
+          <div class="col fs-5 col-5">
             <CalculationParameter v-model="parameterList[51].number" />
           </div>
         </div>
@@ -1729,7 +1730,7 @@ export default {
               DE6
             </p>
           </div>
-          <div class="col fs-5 col-2">
+          <div class="col fs-5 col-5">
             <CalculationParameter v-model="parameterList[52].number" />
           </div>
         </div>
@@ -1739,7 +1740,7 @@ export default {
               DE7
             </p>
           </div>
-          <div class="col fs-5 col-2">
+          <div class="col fs-5 col-5">
             <CalculationParameter v-model="parameterList[53].number" />
           </div>
         </div>
@@ -1750,14 +1751,14 @@ export default {
               Рекомендуется 3-5%.
             </p>
           </div>
-          <div class="col fs-5 col-2">
+          <div class="col fs-5 col-5">
             <CalculationParameter v-model="parameterList[54].number" />
           </div>
         </div>
         <div class="row px-4 align-items-center">
           <div class="col mx-4 p-0 fs-5 col-4">
           </div>
-          <div class="col fs-5 col-2">
+          <div class="col fs-5 col-5">
             DE8 = {{ Other_expense_groups }} руб.
           </div>
         </div>
@@ -1767,7 +1768,7 @@ export default {
               IC1.
             </p>
           </div>
-          <div class="col fs-5 col-2">
+          <div class="col fs-5 col-5">
             <CalculationParameter v-model="parameterList[56].number" />
           </div>
         </div>
@@ -1777,7 +1778,7 @@ export default {
               IC2.
             </p>
           </div>
-          <div class="col fs-5 col-2">
+          <div class="col fs-5 col-5">
             <CalculationParameter v-model="parameterList[57].number" />
           </div>
         </div>
