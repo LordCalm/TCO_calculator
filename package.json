@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@canvasjs/vue-charts": "^1.0.1",
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.2",
     "font-awesome": "^4.7.0",

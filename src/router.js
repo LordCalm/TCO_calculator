@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from './components/Home.vue'
 
 export default createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/TCO_calculator/'), // GitHub Pages
   routes: [
     {
       path: '/',
@@ -24,10 +24,10 @@ export default createRouter({
       path: '/404',
       name: 'NotFound',
       component: () => import('./components/NotFound.vue'),
-  },
-  {
+    },
+    {
       path: '/:catchAll(.*)',
-      redirect:'404'
-  }    
+      redirect: '404'
+    }
   ],
 })

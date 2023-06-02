@@ -1,6 +1,5 @@
 <script>
 import CalculationParameter from './CalculationParameter.vue';
-import CanvasJSChart from '../assets/CanvasJSVueComponent.vue';
 import { exportToCsv } from '../download-csv.js';
 export default {
   mounted() {
@@ -11,7 +10,6 @@ export default {
   },
   components: {
     CalculationParameter,
-    CanvasJSChart
   },
   data() {
     return {
@@ -396,7 +394,7 @@ export default {
         Math.round((Number(this.parameterList[25].number) * (1 +
           Number(this.parameterList[26].number) +
           Number(this.parameterList[27].number))) * 1.43 *
-          Number(this.parameterList[28].number));
+          Number(this.parameterList[28].number) / 40);
       return this.parameterList[24].number;
     },
     Trial_operation_costs() {
@@ -404,7 +402,7 @@ export default {
         Math.round((Number(this.parameterList[29].number) * (1 +
           Number(this.parameterList[30].number) +
           Number(this.parameterList[31].number))) * 1.43 *
-          Number(this.parameterList[32].number));
+          Number(this.parameterList[32].number) / 40);
       return this.parameterList[33].number;
     },
     Capital_expenditures() {
@@ -487,7 +485,8 @@ export default {
       this.parameterList[55].number =
         Math.round((Number(this.parameterList[34].number) +
           Number(this.parameterList[38].number * this.parameterList[39].number / 40) +
-          Number(this.parameterList[43].number + this.parameterList[44].number) +
+          Number(this.parameterList[43].number) +
+          Number(this.parameterList[44].number) +
           Number(this.parameterList[50].number) +
           Number(this.parameterList[51].number) +
           Number(this.parameterList[52].number) +
@@ -499,7 +498,8 @@ export default {
       this.parameterList[58].number =
         Math.round(Number(this.parameterList[34].number) +
           Number(this.parameterList[38].number * this.parameterList[39].number / 40) +
-          Number(this.parameterList[43].number + this.parameterList[44].number) +
+          Number(this.parameterList[43].number) +
+          Number(this.parameterList[44].number) +
           Number(this.parameterList[50].number) +
           Number(this.parameterList[51].number) +
           Number(this.parameterList[52].number) +
@@ -624,9 +624,22 @@ export default {
             self.parameterList[35].number = results.data[37][1];
             self.parameterList[36].number = results.data[38][1];
             self.parameterList[37].number = results.data[39][1];
-            self.parameterList[38].number = results.data[40][3];
-            self.parameterList[39].number = results.data[41][3];
-
+            self.parameterList[38].number = results.data[40][1];
+            self.parameterList[39].number = results.data[41][1];
+            self.parameterList[40].number = results.data[43][1];
+            self.parameterList[41].number = results.data[44][1];
+            self.parameterList[42].number = results.data[45][1];
+            self.parameterList[44].number = results.data[49][1];
+            self.parameterList[45].number = results.data[50][1];
+            self.parameterList[46].number = results.data[51][1];
+            self.parameterList[47].number = results.data[52][1];
+            self.parameterList[50].number = results.data[58][1];
+            self.parameterList[51].number = results.data[59][1];
+            self.parameterList[52].number = results.data[60][1];
+            self.parameterList[53].number = results.data[61][1];
+            self.parameterList[54].number = results.data[62][1];
+            self.parameterList[56].number = results.data[64][1];
+            self.parameterList[57].number = results.data[65][1];
           }
         });
       }
@@ -853,7 +866,7 @@ export default {
             <div class="row row-cols-auto row-cols-md-2 g-0 g-md-4">
               <div class="col">
                 <div class="border rounded-3 shadow">
-                  <img src="src/Images/TCO-Microsoft.png" class="img-fluid p-4"
+                  <img src="../../src/Images/TCO-Microsoft.png" class="img-fluid p-4"
                     alt="Модель ТСО, разработанная компанией Microsoft совместно с Interpose">
                   <p class="introduction fs-5 text-wrap text-center p-2">Модель ТСО, разработанная компанией Microsoft
                     совместно с Interpose</p>
@@ -861,7 +874,7 @@ export default {
               </div>
               <div class="col">
                 <div class="align-self-center h-auto border rounded-3 shadow">
-                  <img src="src/Images/TCO-GartnerGroup.png" class="img-fluid p-4"
+                  <img src="../../src/Images/TCO-GartnerGroup.png" class="img-fluid p-4"
                     alt="Модель TCO, предложенная Gartner Group">
                   <p class="introduction fs-5 text-wrap text-center p-2">Модель TCO, предложенная Gartner Group</p>
                 </div>
@@ -939,7 +952,7 @@ export default {
                             <CalculationParameter v-model="parameterList[1].number" />
                           </td>
                           <td>
-                            {{ Number(parameterList[0].number) * Number(parameterList[1].number) }}
+                            {{ Math.round(Number(parameterList[0].number) * Number(parameterList[1].number)) }}
                           </td>
                         </tr>
                       </tbody>
@@ -1209,39 +1222,107 @@ export default {
             К<sub>об</sub>
           </p>
           <div class="row align-items-center">
-            <div class="col mx-4 p-0 fs-5 col-4">
-              <p>
-                Оклад тренера
-              </p>
-            </div>
-            <div class="col fs-5 col-5">
-              <CalculationParameter v-model="parameterList[25].number" />
+            <div class="table-responsive fs-5">
+              <table class="table table-bordered">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col" colspan="2">Доходы</th>
+                    <th scope="col" colspan="2">Расходы</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Сумма, руб.</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Сумма, руб.</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Оклад тренера</td>
+                    <td>
+                      <CalculationParameter v-model="parameterList[25].number" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Надбавка за стаж работы в указанной местности</td>
+                    <td class="p-0">
+                      <table class="table table-borderless mb-0">
+                        <tbody>
+                          <tr>
+                            <td>
+                              <CalculationParameter v-model="parameterList[26].number" />
+                            </td>
+                            <td>
+                              {{ Math.round(Number(parameterList[25].number) * Number(parameterList[26].number)) }}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Районный коэффициент</td>
+                    <td class="p-0">
+                      <table class="table table-borderless mb-0">
+                        <tbody>
+                          <tr>
+                            <td>
+                              <CalculationParameter v-model="parameterList[27].number" />
+                            </td>
+                            <td>
+                              {{ Math.round(Number(parameterList[25].number) * Number(parameterList[27].number)) }}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th>Все доходы</th>
+                    <td>
+                      {{ Math.round(Number(parameterList[25].number) * (1 + Number(parameterList[26].number) + Number(parameterList[27].number))) }}
+                    </td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td></td>
+                    <td>НДФЛ</td>
+                    <td>
+                      {{ Math.round(Number(parameterList[25].number) * (1 + Number(parameterList[26].number) + Number(parameterList[27].number)) * 0.13) }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td></td>
+                    <td>Отчисления во внебюджетные фонды</td>
+                    <td>
+                      {{ Math.round(Number(parameterList[25].number) * (1 + Number(parameterList[26].number) + Number(parameterList[27].number)) * 0.3) }}
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Итог</th>
+                    <td colspan="3">
+                      {{ Math.round(Number(parameterList[25].number) * (1 + Number(parameterList[26].number) + Number(parameterList[27].number)) * 1.43) }}
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
             </div>
           </div>
           <div class="row align-items-center">
             <div class="col mx-4 p-0 fs-5 col-4">
               <p>
-                Надбавка за стаж тренера
-              </p>
-            </div>
-            <div class="col fs-5 col-5">
-              <CalculationParameter v-model="parameterList[26].number" />
-            </div>
-          </div>
-          <div class="row align-items-center">
-            <div class="col mx-4 p-0 fs-5 col-4">
-              <p>
-                Районный коэффициент тренера
-              </p>
-            </div>
-            <div class="col fs-5 col-5">
-              <CalculationParameter v-model="parameterList[27].number" />
-            </div>
-          </div>
-          <div class="row align-items-center">
-            <div class="col mx-4 p-0 fs-5 col-4">
-              <p>
-                Длительность обучения
+                Длительность обучения, часы
               </p>
             </div>
             <div class="col fs-5 col-5">
@@ -1253,7 +1334,7 @@ export default {
             ({{ this.parameterList[25].number }} * ( 1 +
             {{ this.parameterList[26].number }} +
             {{ this.parameterList[27].number }})) * 1.43 *
-            {{ parameterList[28].number }} =
+            {{ parameterList[28].number }} / 40 =
             {{ Staff_training_costs }} руб.
           </div>
         </div>
@@ -1363,7 +1444,7 @@ export default {
           <div class="row align-items-center">
             <div class="col mx-4 p-0 fs-5 col-4">
               <p>
-                Длительность опытной эксплуатации
+                Длительность опытной эксплуатации, часы
               </p>
             </div>
             <div class="col fs-5 col-5">
@@ -1375,7 +1456,7 @@ export default {
             ({{ this.parameterList[29].number }} * ( 1 +
             {{ this.parameterList[30].number }} +
             {{ this.parameterList[31].number }})) * 1.43 *
-            {{ parameterList[32].number }} =
+            {{ parameterList[32].number }} / 40 =
             {{ Math.round(Trial_operation_costs) }} руб.
           </div>
         </div>
@@ -1553,17 +1634,17 @@ export default {
           </div>
           <div class="row align-items-center">
             <div class="col mx-4 p-0 fs-5 col-4">
-              <p>Срок службы оборудования</p>
+              <p>Срок службы оборудования, лет</p>
             </div>
             <div class="col fs-5 col-5">
               <CalculationParameter v-model="parameterList[42].number" />
             </div>
           </div>
           <div class="container fs-5">
-            Н<sub>ам</sub> = {{ 100 / Number(parameterList[42].number) }}%.
+            Н<sub>ам</sub> = {{ Math.round(100 / Number(parameterList[42].number)) }}%.
           </div>
           <div class="container fs-5">
-            А<sub>год</sub> = {{ Number(parameterList[40].number) * (100 / Number(parameterList[42].number)) / 100 }} руб.
+            А<sub>год</sub> = {{ Math.round(Number(parameterList[40].number) * (100 / Number(parameterList[42].number)) / 100) }} руб.
           </div>
           <div class="container fs-5">
             А<sub>эксп</sub> = {{ Depreciation_deductions }} руб.
@@ -1696,12 +1777,12 @@ export default {
         </div>
         <div class="row px-4">
           <p class="h4 px-4">
-            DE2 = {{ parameterList[38].number * parameterList[39].number / 40 }} руб.
+            DE2 = {{ Math.round(Number(parameterList[38].number) * Number(parameterList[39].number) / 40) }} руб.
           </p>
         </div>
         <div class="row px-4">
           <p class="h4 px-4">
-            DE3 = {{ parameterList[43].number + parameterList[44].number }} руб.
+            DE3 = {{ Math.round(Number(parameterList[43].number) + Number(parameterList[44].number)) }} руб.
           </p>
         </div>
         <div class="row px-4 align-items-center">
@@ -1765,7 +1846,7 @@ export default {
         <div class="row px-4 align-items-center">
           <div class="container mx-4 p-0 h4 col-4">
             <p>
-              IC1.
+              IC1
             </p>
           </div>
           <div class="col fs-5 col-5">
@@ -1775,7 +1856,7 @@ export default {
         <div class="row px-4 align-items-center">
           <div class="container mx-4 p-0 h4 col-4">
             <p>
-              IC2.
+              IC2
             </p>
           </div>
           <div class="col fs-5 col-5">

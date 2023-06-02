@@ -6,11 +6,13 @@ export default {
 </script>
 
 <template>
-    <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
+    <textarea :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" rows="1"></textarea>
 </template>
 
 <style scoped>
-input {
+textarea {
     width: 100%;
+    min-width: 80px;
+    resize: vertical;
 }
 </style>

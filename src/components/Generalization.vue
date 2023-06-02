@@ -1,6 +1,5 @@
 <script>
 import CalculationParameter from './CalculationParameter.vue';
-import CanvasJSChart from '../assets/CanvasJSVueComponent.vue';
 import { exportToCsv } from '../download-csv.js';
 export default {
     mounted() {
@@ -11,7 +10,6 @@ export default {
     },
     components: {
         CalculationParameter,
-        CanvasJSChart
     },
     data() {
         return {
@@ -65,7 +63,27 @@ export default {
                     number: 0
                 },
                 {
-                    parameterName: "", // #12
+                    parameterName: "Базовые эксплуатационные затраты", // #12
+                    number: 0
+                },
+                {
+                    parameterName: "Базовые затраты, связанные с внедрением", // #13
+                    number: 0
+                },
+                {
+                    parameterName: "Разрабатываемые эксплуатационные затраты", // #14
+                    number: 0
+                },
+                {
+                    parameterName: "Разрабатываемые затраты, связанные с внедрением", // #15
+                    number: 0
+                },
+                {
+                    parameterName: "Объем работ, выполняемых с помощью разрабатываемого проекта, натуральные единицы", // #16
+                    number: 0
+                },
+                {
+                    parameterName: "Единовременные затраты на разработку проекта", // #17
                     number: 0
                 },
             ],
@@ -112,7 +130,7 @@ export default {
                     this.parameterList[11].number));
         },
         ETU() {
-            return Math.round(this.ZTR_new / this.ZTR_basic);
+            return (this.ZTR_new / this.ZTR_basic).toFixed(2);
         },
 
         Quality_Score_New() {
@@ -138,6 +156,47 @@ export default {
                 }
             }
             return (sum / totalWeight).toFixed(2);
+        },
+        Technical_Level() {
+            return (this.Quality_Score_New / this.Quality_Score_Base).toFixed(2);
+        },
+        Adjusted_Cost_Per_Unit_basic() {
+            return Math.round(Number(this.parameterList[12].number) +
+                0.33 * Number(this.parameterList[13].number));
+        },
+        Adjusted_Cost_Per_Unit_new() {
+            return Math.round(Number(this.parameterList[14].number) +
+                0.33 * Number(this.parameterList[15].number));
+        },
+        Economic_Effect() {
+            return Math.round(Number(this.parameterList[16].number) *
+                (Number(this.Adjusted_Cost_Per_Unit_basic) *
+                    Number(this.Technical_Level) -
+                    Number(this.Adjusted_Cost_Per_Unit_new)));
+        },
+        Payback_Period() {
+            return (Number(this.parameterList[17].number) /
+                Number(this.Economic_Effect)).toFixed(2);
+        },
+        paybackPeriodText() {
+            const years = this.Payback_Period;
+
+            if (years === 1) {
+                return `${years} год`;
+            } else if (years >= 2 && years <= 4) {
+                return `${years} года`;
+            } else {
+                return `${years} лет`;
+            }
+        },
+        paybackPeriodTextMonth() {
+            const months = Math.ceil(this.Payback_Period * 12);
+
+            if (months === 1) {
+                return `${months} месяц`;
+            } else {
+                return `${months} месяцев`;
+            }
         },
     },
     methods: {
@@ -225,12 +284,6 @@ export default {
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fs-5 px-2" href="#scrollspyHeading2">Балльно-индексный метод</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fs-5 px-2" href="#scrollspyHeading3">Эксплуатационные затраты</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fs-5 px-2" href="#scrollspyHeading4">ТСО</a>
                         </li>
                     </ul>
                 </div>
@@ -369,12 +422,12 @@ export default {
                     </div>
                 </div>
                 <div class="container p-0">
-                    <div class="row row-cols-2 mx-4 mb-4 g-4">
+                    <div class="row row-cols-auto mx-4 mb-4 g-4">
                         <div class="col fs-5 text-wrap">
                             <div>Коэффициент эксплуатационно-технического уровня</div>
                         </div>
                         <div class="col fs-5">
-                            <div>К<sub>эту</sub> = {{ ETU }} руб.</div>
+                            <div>К<sub>эту</sub> = {{ ETU }}</div>
                         </div>
                     </div>
                 </div>
@@ -482,7 +535,10 @@ export default {
                 <button class="btn btn-primary fs-5 m-4 me-auto w-auto" type="button" v-on:click="Download_csv"> Скачать
                     таблицу
                 </button>
-                <div class="col align-content-center m-4 p-2">
+                <div class="row h4 mx-4 mt-4">
+                    Чтобы продолжить работу с таблицей, загрузите её с помощью формы
+                </div>
+                <div class="row align-content-center m-4 p-2">
                     <div class="dropzone border rounded-3 shadow bg-light d-flex flex-column align-items-center"
                         @dragenter.prevent="toggleActive" @dragleave.prevent="toggleActive" @dragover.prevent
                         @drop.prevent="drop" v-bind:class="{ 'active-dropzone': active }">
@@ -492,6 +548,97 @@ export default {
                         <input class="dropzoneFile d-none" type="file" id="dropzoneFile" @change="onChange" ref="file"
                             accept=".csv" />
                         <div class="fileInfo fs-5">Файл: {{ dropzoneFile.name }}</div>
+                    </div>
+                </div>
+                <div class="row row-cols-auto mx-4 mb-4 g-4">
+                    <div class="col fs-5 text-wrap">
+                        <div>Коэффициент технического уровня </div>
+                    </div>
+                    <div class="col fs-5">
+                        <div>К<sub>т</sub> = {{ Technical_Level }}</div>
+                    </div>
+                </div>
+                <div class="row h4 mx-4 mt-4">
+                    Приведенные затраты на единицу работ
+                </div>
+                <div class="row p-4">
+                    <div class="table-responsive fs-5">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="align-middle" scope="col">Затраты</th>
+                                    <th scope="col">Базовый вариант</th>
+                                    <th scope="col">Разрабатываемый вариант</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Эксплуатационные затраты</th>
+                                    <td>
+                                        <CalculationParameter v-model="parameterList[12].number" />
+                                    </td>
+                                    <td>
+                                        <CalculationParameter v-model="parameterList[14].number" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Затраты, связанные с внедрением</th>
+                                    <td>
+                                        <CalculationParameter v-model="parameterList[13].number" />
+                                    </td>
+                                    <td>
+                                        <CalculationParameter v-model="parameterList[15].number" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Приведённые затраты на единицу работ</th>
+                                    <td>{{ Adjusted_Cost_Per_Unit_basic }}</td>
+                                    <td>{{ Adjusted_Cost_Per_Unit_new }}</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="row row-cols-auto mx-4 mb-4 g-4">
+                    <div class="col fs-5 text-wrap">
+                        <div>Объем работ, выполняемых с помощью разрабатываемого проекта, натуральные единицы</div>
+                    </div>
+                    <div class="col fs-5">
+                        <CalculationParameter v-model="parameterList[16].number" />
+                    </div>
+                </div>
+                <div class="row row-cols-auto mx-4 mb-4 g-4">
+                    <div class="col fs-5 text-wrap">
+                        <div>Экономический эффект от использования разрабатываемой системы </div>
+                    </div>
+                    <div class="col fs-5">
+                        <div>Э = {{ Economic_Effect }} руб.</div>
+                    </div>
+                </div>
+                <div class="row row-cols-auto mx-4 mb-4 g-4">
+                    <div class="col fs-5 text-wrap">
+                        <div>Единовременные затраты на разработку проекта</div>
+                    </div>
+                    <div class="col fs-5">
+                        <CalculationParameter v-model="parameterList[17].number" />
+                    </div>
+                </div>
+                <div class="row row-cols-auto mx-4 mb-4 g-4">
+                    <div class="col fs-5 text-wrap">
+                        <div>Срок окупаемости затрат на разработку проекта</div>
+                    </div>
+                    <div class="col fs-5">
+                        <div>Т<sub>ок</sub> = {{ paybackPeriodText }} = {{ paybackPeriodTextMonth }}</div>
+                    </div>
+                </div>
+                <div class="row row-cols-auto mx-4 mb-4 g-4">
+                    <div class="col fs-5 text-wrap">
+                        <div>Фактический коэффициент экономической эффективности разработки</div>
+                    </div>
+                    <div class="col fs-5">
+                        <div> Е<sub>ф</sub> = {{ (1 / Payback_Period).toFixed(2) }}</div>
                     </div>
                 </div>
             </div>
