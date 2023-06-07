@@ -325,7 +325,7 @@ export default {
     },
     All_income() {
       this.parameterList[3].number =
-        Math.round(Number(this.parameterList[0].number * (1 + this.parameterList[2].number)) +
+        Math.round(Number(this.parameterList[0].number * (1 + Number(this.parameterList[2].number))) +
           Number(Number(this.parameterList[0].number) * Number(this.parameterList[1].number)));
       return this.parameterList[3].number;
     },
@@ -394,7 +394,7 @@ export default {
         Math.round((Number(this.parameterList[25].number) * (1 +
           Number(this.parameterList[26].number) +
           Number(this.parameterList[27].number))) * 1.43 *
-          Number(this.parameterList[28].number) / 40);
+          Number(this.parameterList[28].number) / 168);
       return this.parameterList[24].number;
     },
     Trial_operation_costs() {
@@ -402,7 +402,7 @@ export default {
         Math.round((Number(this.parameterList[29].number) * (1 +
           Number(this.parameterList[30].number) +
           Number(this.parameterList[31].number))) * 1.43 *
-          Number(this.parameterList[32].number) / 40);
+          Number(this.parameterList[32].number) / 168);
       return this.parameterList[33].number;
     },
     Capital_expenditures() {
@@ -463,7 +463,7 @@ export default {
     },
     Other_costs() {
       this.parameterList[48].number =
-        Math.round((Number(this.parameterList[38].number * this.parameterList[39].number / 40) +
+        Math.round((Number(this.parameterList[38].number * this.parameterList[39].number / 168) +
           Number(this.parameterList[43].number) +
           Number(this.parameterList[44].number) +
           Number(this.parameterList[45].number) +
@@ -473,7 +473,7 @@ export default {
     },
     Operating_costs() {
       this.parameterList[49].number =
-        Math.round(Number(this.parameterList[38].number * this.parameterList[39].number / 40) +
+        Math.round(Number(this.parameterList[38].number * this.parameterList[39].number / 168) +
           Number(this.parameterList[43].number) +
           Number(this.parameterList[44].number) +
           Number(this.parameterList[45].number) +
@@ -483,8 +483,8 @@ export default {
     },
     Other_expense_groups() {
       this.parameterList[55].number =
-        Math.round((Number(this.parameterList[34].number) +
-          Number(this.parameterList[38].number * this.parameterList[39].number / 40) +
+        Math.round((//Number(this.parameterList[34].number) +
+          Number(this.parameterList[38].number * this.parameterList[39].number / 168) +
           Number(this.parameterList[43].number) +
           Number(this.parameterList[44].number) +
           Number(this.parameterList[50].number) +
@@ -497,7 +497,7 @@ export default {
     TCO() {
       this.parameterList[58].number =
         Math.round(Number(this.parameterList[34].number) +
-          Number(this.parameterList[38].number * this.parameterList[39].number / 40) +
+          Number(this.parameterList[38].number * this.parameterList[39].number / 168) +
           Number(this.parameterList[43].number) +
           Number(this.parameterList[44].number) +
           Number(this.parameterList[50].number) +
@@ -518,7 +518,7 @@ export default {
           ["Доходы", "", "Расходы"],
           ["Название", "Сумма, руб.", "Название", "Сумма, руб."],
           ["Оклад", this.parameterList[0].number],
-          ["Надбавка за стаж работы в указанной местности", this.parameterList[1].number],
+          ["Северная надбавка, коэффициент", this.parameterList[1].number],
           ["Районный коэффициент", this.parameterList[0].number * this.parameterList[2].number],
           ["Все доходы", this.parameterList[3].number],
           ["", "", "НДФЛ", this.parameterList[4].number],
@@ -556,7 +556,7 @@ export default {
           ["Районный коэффициент эксплуатационный", this.parameterList[37].number],
           ["Зарплата эксплуатационная", this.parameterList[38].number],
           ["Часы эксплуатационные", this.parameterList[39].number],
-          ["Сзп", this.parameterList[38].number * this.parameterList[39].number / 40],
+          ["Сзп", this.parameterList[38].number * this.parameterList[39].number / 168],
           ["Стоимость оборудования", this.parameterList[40].number],
           ["Количество часов эксплуатации оборудования", this.parameterList[41].number],
           ["Срок службы оборудования", this.parameterList[42].number],
@@ -570,7 +570,7 @@ export default {
           ["Спроч", this.Other_costs],
           ["С", this.Operating_costs],
           ["DE1", this.parameterList[34].number],
-          ["DE2", this.parameterList[38].number * this.parameterList[39].number / 40],
+          ["DE2", this.parameterList[38].number * this.parameterList[39].number / 168],
           ["DE3", this.parameterList[43].number + this.parameterList[44].number],
           ["DE4", this.parameterList[50].number],
           ["DE5", this.parameterList[51].number],
@@ -748,10 +748,10 @@ export default {
     generateDataPoints3() {
       let dps = [
         {
-          y: Math.round(this.parameterList[38].number * this.parameterList[39].number / 40),
+          y: Math.round(this.parameterList[38].number * this.parameterList[39].number / 168),
           name: "Зарплата персонала, работающего с информационной системой",
           label: "Зарплата персонала, работающего с информационной системой",
-          indexLabel: Math.round(Math.round(this.parameterList[38].number * this.parameterList[39].number / 40) / this.parameterList[49].number * 100) + "%"
+          indexLabel: Math.round(Math.round(this.parameterList[38].number * this.parameterList[39].number / 168) / this.parameterList[49].number * 100) + "%"
         },
         {
           y: this.parameterList[43].number,
@@ -891,8 +891,8 @@ export default {
           data-bs-target="#collapseCapitalExpenditures" aria-expanded="false" aria-controls="collapseCapitalExpenditures">
           Показать пояснения
         </button>
-        <div class="row collapse" id="collapseCapitalExpenditures">
-          <div class="col p-4 fs-5 text-wrap">
+        <div class="row mx-4 collapse" id="collapseCapitalExpenditures">
+          <div class="col p-2 fs-5 text-wrap">
             Капитальные затраты на разработку информационной системы вычисляются по формуле<br>
             <br>
             К = К<sub>пр</sub> + К<sub>тс</sub> + К<sub>лс</sub> + К<sub>по</sub> + К<sub>ио</sub> + К<sub>об</sub> +
@@ -943,39 +943,39 @@ export default {
                   <td></td>
                 </tr>
                 <tr>
-                  <td>Надбавка за стаж работы в указанной местности</td>
                   <td class="p-0">
                     <table class="table table-borderless mb-0">
                       <tbody>
                         <tr>
+                          <td>Северная надбавка, коэффициент</td>
                           <td>
                             <CalculationParameter v-model="parameterList[1].number" />
-                          </td>
-                          <td>
-                            {{ Math.round(Number(parameterList[0].number) * Number(parameterList[1].number)) }}
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </td>
+                  <td>
+                    {{ Math.round(Number(parameterList[0].number) * Number(parameterList[1].number)) }}
+                  </td>
                   <td></td>
                   <td></td>
                 </tr>
                 <tr>
-                  <td>Районный коэффициент</td>
                   <td class="p-0">
                     <table class="table table-borderless mb-0">
                       <tbody>
                         <tr>
+                          <td>Районный коэффициент</td>
                           <td>
                             <CalculationParameter v-model="parameterList[2].number" />
-                          </td>
-                          <td>
-                            {{ District_coefficient }}
                           </td>
                         </tr>
                       </tbody>
                     </table>
+                  </td>
+                  <td>
+                    {{ District_coefficient }}
                   </td>
                   <td></td>
                   <td></td>
@@ -1072,14 +1072,20 @@ export default {
               <CalculationParameter v-model="parameterList[12].number" />
             </div>
           </div>
-          <div class="container">
-            Н<sub>ам</sub> = {{ Depreciation_rate }}%.
+          <div class="row">
+            <div class="col mx-4 p-0 col-4 fs-5">
+              Н<sub>ам</sub> = {{ Depreciation_rate }}%.
+            </div>
           </div>
-          <div class="container">
-            А<sub>год</sub> = {{ Depreciation_per_year }} руб.
+          <div class="row">
+            <div class="col mx-4 p-0 col-4 fs-5">
+              А<sub>год</sub> = {{ Depreciation_per_year }} руб.
+            </div>
           </div>
-          <div class="container">
-            А<sub>пр</sub> = {{ Depreciation_per_project }} руб.
+          <div class="row">
+            <div class="col mx-4 p-0 col-4 fs-5">
+              А<sub>пр</sub> = {{ Depreciation_per_project }} руб.
+            </div>
           </div>
         </div>
         <div class="row p-4">
@@ -1121,8 +1127,8 @@ export default {
           <p class="h4">
             К<sub>пр</sub> =
             {{ parameterList[6].number }} +
-            {{ parameterList[13].number }} +
             {{ parameterList[11].number }} +
+            {{ parameterList[13].number }} +
             {{ parameterList[15].number }} =
             {{ Design_costs }}
           </p>
@@ -1139,10 +1145,6 @@ export default {
           <p class="h4">
             К<sub>тс</sub>
           </p>
-          <div class="col fs-5 col-5 text-wrap">
-            Затраты на технические средства управления. Затраты
-            на технические средства управления включают в себя стоимость компьютера и серверного ПК.
-          </div>
           <div class="row align-items-center">
             <div class="col mx-4 p-0 fs-5 col-4">
               <p>
@@ -1238,7 +1240,7 @@ export default {
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Оклад тренера</td>
+                    <td>Оклад</td>
                     <td>
                       <CalculationParameter v-model="parameterList[25].number" />
                     </td>
@@ -1246,7 +1248,7 @@ export default {
                     <td></td>
                   </tr>
                   <tr>
-                    <td>Надбавка за стаж работы в указанной местности</td>
+                    <td>Северная надбавка, коэффициент</td>
                     <td class="p-0">
                       <table class="table table-borderless mb-0">
                         <tbody>
@@ -1286,7 +1288,8 @@ export default {
                   <tr>
                     <th>Все доходы</th>
                     <td>
-                      {{ Math.round(Number(parameterList[25].number) * (1 + Number(parameterList[26].number) + Number(parameterList[27].number))) }}
+                      {{ Math.round(Number(parameterList[25].number) * (1 + Number(parameterList[26].number) +
+                        Number(parameterList[27].number))) }}
                     </td>
                     <td></td>
                     <td></td>
@@ -1296,7 +1299,8 @@ export default {
                     <td></td>
                     <td>НДФЛ</td>
                     <td>
-                      {{ Math.round(Number(parameterList[25].number) * (1 + Number(parameterList[26].number) + Number(parameterList[27].number)) * 0.13) }}
+                      {{ Math.round(Number(parameterList[25].number) * (1 + Number(parameterList[26].number) +
+                        Number(parameterList[27].number)) * 0.13) }}
                     </td>
                   </tr>
                   <tr>
@@ -1304,7 +1308,8 @@ export default {
                     <td></td>
                     <td>Отчисления во внебюджетные фонды</td>
                     <td>
-                      {{ Math.round(Number(parameterList[25].number) * (1 + Number(parameterList[26].number) + Number(parameterList[27].number)) * 0.3) }}
+                      {{ Math.round(Number(parameterList[25].number) * (1 + Number(parameterList[26].number) +
+                        Number(parameterList[27].number)) * 0.3) }}
                     </td>
                   </tr>
                 </tbody>
@@ -1312,7 +1317,8 @@ export default {
                   <tr>
                     <th>Итог</th>
                     <td colspan="3">
-                      {{ Math.round(Number(parameterList[25].number) * (1 + Number(parameterList[26].number) + Number(parameterList[27].number)) * 1.43) }}
+                      {{ Math.round(Number(parameterList[25].number) * (1 + Number(parameterList[26].number) +
+                        Number(parameterList[27].number)) * 1.43) }}
                     </td>
                   </tr>
                 </tfoot>
@@ -1331,10 +1337,10 @@ export default {
           </div>
           <div class="container fs-5 text-wrap">
             К<sub>об</sub> =
-            ({{ this.parameterList[25].number }} * ( 1 +
-            {{ this.parameterList[26].number }} +
-            {{ this.parameterList[27].number }})) * 1.43 *
-            {{ parameterList[28].number }} / 40 =
+            ({{ parameterList[25].number }} * ( 1 +
+            {{ parameterList[26].number }} +
+            {{ parameterList[27].number }})) * 1.43 *
+            {{ parameterList[28].number }} / 168 =
             {{ Staff_training_costs }} руб.
           </div>
         </div>
@@ -1366,7 +1372,7 @@ export default {
                   <td></td>
                 </tr>
                 <tr>
-                  <td>Надбавка за стаж работы в указанной местности</td>
+                  <td>Северная надбавка, коэффициент</td>
                   <td class="p-0">
                     <table class="table table-borderless mb-0">
                       <tbody>
@@ -1394,7 +1400,7 @@ export default {
                             <CalculationParameter v-model="parameterList[31].number" />
                           </td>
                           <td>
-                            {{ Math.round(parameterList[29].number * parameterList[31].number) }}
+                            {{ Math.round(Number(parameterList[29].number) * Number(parameterList[31].number)) }}
                           </td>
                         </tr>
                       </tbody>
@@ -1406,7 +1412,8 @@ export default {
                 <tr>
                   <th>Все доходы</th>
                   <td>
-                    {{ Math.round(parameterList[29].number * (1 + parameterList[30].number + parameterList[31].number)) }}
+                    {{ Math.round(Number(parameterList[29].number) * (1 + Number(parameterList[30].number) +
+                      Number(parameterList[31].number))) }}
                   </td>
                   <td></td>
                   <td></td>
@@ -1416,7 +1423,8 @@ export default {
                   <td></td>
                   <td>НДФЛ</td>
                   <td>
-                    {{ Math.round((parameterList[29].number * (1 + parameterList[30].number + parameterList[31].number)) *
+                    {{ Math.round((Number(parameterList[29].number) * (1 + Number(parameterList[30].number) +
+                      Number(parameterList[31].number))) *
                       0.13) }}
                   </td>
                 </tr>
@@ -1425,7 +1433,8 @@ export default {
                   <td></td>
                   <td>Отчисления во внебюджетные фонды</td>
                   <td>
-                    {{ Math.round((parameterList[29].number * (1 + parameterList[30].number + parameterList[31].number)) *
+                    {{ Math.round((Number(parameterList[29].number) * (1 + Number(parameterList[30].number) +
+                      Number(parameterList[31].number))) *
                       0.3) }}
                   </td>
                 </tr>
@@ -1434,7 +1443,8 @@ export default {
                 <tr>
                   <th>Итог</th>
                   <td colspan="3">
-                    {{ Math.round((parameterList[29].number * (1 + parameterList[30].number + parameterList[31].number)) *
+                    {{ Math.round((Number(parameterList[29].number) * (1 + Number(parameterList[30].number) +
+                      Number(parameterList[31].number))) *
                       1.43) }}
                   </td>
                 </tr>
@@ -1453,10 +1463,10 @@ export default {
           </div>
           <div class="container fs-5 text-wrap">
             К<sub>оэ</sub> =
-            ({{ this.parameterList[29].number }} * ( 1 +
-            {{ this.parameterList[30].number }} +
-            {{ this.parameterList[31].number }})) * 1.43 *
-            {{ parameterList[32].number }} / 40 =
+            ({{ parameterList[29].number }} * ( 1 +
+            {{ parameterList[30].number }} +
+            {{ parameterList[31].number }})) * 1.43 *
+            {{ parameterList[32].number }} / 168 =
             {{ Math.round(Trial_operation_costs) }} руб.
           </div>
         </div>
@@ -1528,7 +1538,7 @@ export default {
                   <td></td>
                 </tr>
                 <tr>
-                  <td>Надбавка за стаж работы в указанной местности</td>
+                  <td>Северная надбавка, коэффициент</td>
                   <td class="p-0">
                     <table class="table table-borderless mb-0">
                       <tbody>
@@ -1611,7 +1621,7 @@ export default {
             </div>
           </div>
           <div class="container fs-5">
-            С<sub>зп</sub> = {{ parameterList[38].number * parameterList[39].number / 40 }} руб.
+            С<sub>зп</sub> = {{ Math.round(parameterList[38].number * parameterList[39].number / 168) }} руб.
           </div>
         </div>
         <div class="col p-4">
@@ -1644,7 +1654,8 @@ export default {
             Н<sub>ам</sub> = {{ Math.round(100 / Number(parameterList[42].number)) }}%.
           </div>
           <div class="container fs-5">
-            А<sub>год</sub> = {{ Math.round(Number(parameterList[40].number) * (100 / Number(parameterList[42].number)) / 100) }} руб.
+            А<sub>год</sub> = {{ Math.round(Number(parameterList[40].number) * (100 / Number(parameterList[42].number)) /
+              100) }} руб.
           </div>
           <div class="container fs-5">
             А<sub>эксп</sub> = {{ Depreciation_deductions }} руб.
@@ -1722,7 +1733,7 @@ export default {
         <div class="col p-4">
           <p class="h4">
             С =
-            {{ parameterList[38].number * parameterList[39].number / 40 }} +
+            {{ Math.round(parameterList[38].number * parameterList[39].number / 168) }} +
             {{ parameterList[43].number }} +
             {{ parameterList[44].number }} +
             {{ parameterList[45].number }} +
@@ -1777,7 +1788,7 @@ export default {
         </div>
         <div class="row px-4">
           <p class="h4 px-4">
-            DE2 = {{ Math.round(Number(parameterList[38].number) * Number(parameterList[39].number) / 40) }} руб.
+            DE2 = {{ Math.round(Number(parameterList[38].number) * Number(parameterList[39].number) / 168) }} руб.
           </p>
         </div>
         <div class="row px-4">
@@ -1828,19 +1839,12 @@ export default {
         <div class="row px-4 align-items-center">
           <div class="container mx-4 p-0 h4 col-4">
             <p>
-              DE8<br>
+              DE8 = {{ Other_expense_groups }} руб.<br>
               Рекомендуется 3-5%.
             </p>
           </div>
           <div class="col fs-5 col-5">
             <CalculationParameter v-model="parameterList[54].number" />
-          </div>
-        </div>
-        <div class="row px-4 align-items-center">
-          <div class="col mx-4 p-0 fs-5 col-4">
-          </div>
-          <div class="col fs-5 col-5">
-            DE8 = {{ Other_expense_groups }} руб.
           </div>
         </div>
         <div class="row px-4 align-items-center">

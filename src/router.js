@@ -17,9 +17,6 @@ export default createRouter({
       component: () => import('./components/Generalization.vue'),
     },
 
-
-
-
     {
       path: '/404',
       name: 'NotFound',
