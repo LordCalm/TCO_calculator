@@ -15,7 +15,7 @@ export default {
       <div class="row">
         <div class="col-sm-12 p-2 text-center">
           <router-link to="/" class="text-dark text-decoration-none fs-4 title">Технико-экономическое
-            обоснование</router-link>
+            обоснование IT-проекта</router-link>
         </div>
       </div>
     </div>

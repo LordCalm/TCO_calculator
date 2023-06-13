@@ -4,9 +4,7 @@ import { exportToCsv } from '../download-csv.js';
 export default {
     mounted() {
         // Инициализация Scrollspy
-        const scrollSpy = new bootstrap.ScrollSpy(document.body, {
-            target: '#navbar-tco'
-        });
+        const scrollSpy = new bootstrap.ScrollSpy(document.body, {});
     },
     components: {
         CalculationParameter,
@@ -114,20 +112,20 @@ export default {
     //   },
     computed: {
         ZTR_basic() {
-            return Math.round((this.parameterList[0].number *
+            return ((this.parameterList[0].number *
                 this.parameterList[1].number *
                 this.parameterList[2].number) +
                 (this.parameterList[3].number *
                     this.parameterList[4].number *
-                    this.parameterList[5].number));
+                    this.parameterList[5].number)).toFixed(3);
         },
         ZTR_new() {
-            return Math.round((this.parameterList[6].number *
+            return ((this.parameterList[6].number *
                 this.parameterList[7].number *
                 this.parameterList[8].number) +
                 (this.parameterList[9].number *
                     this.parameterList[10].number *
-                    this.parameterList[11].number));
+                    this.parameterList[11].number)).toFixed(3);
         },
         ETU() {
             return (this.ZTR_new / this.ZTR_basic).toFixed(2);
@@ -139,8 +137,8 @@ export default {
             for (let row of this.rows) {
                 const xi = parseFloat(row.new);
                 if (!isNaN(xi)) {
-                    sum += xi * row.weight;
-                    totalWeight += row.weight;
+                    sum += xi * Number(row.weight);
+                    totalWeight += Number(row.weight);
                 }
             }
             return (sum / totalWeight).toFixed(2);
@@ -151,8 +149,8 @@ export default {
             for (let row of this.rows) {
                 const xi = parseFloat(row.base);
                 if (!isNaN(xi)) {
-                    sum += xi * row.weight;
-                    totalWeight += row.weight;
+                    sum += xi * Number(row.weight);
+                    totalWeight += Number(row.weight);
                 }
             }
             return (sum / totalWeight).toFixed(2);
@@ -261,7 +259,7 @@ export default {
         <div class="container">
             <a class="navbar-brand text-dark h2 fs-2 ps-4">
                 <router-link to="/" class="nav-link p-0">
-                    <span class="d-none d-sm-inline">Главная</span>
+                    <span class="d-inline">Главная</span>
                 </router-link>
             </a>
             <div class="navbar-light">
