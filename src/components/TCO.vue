@@ -251,6 +251,20 @@ export default {
           number: 0
         },
       ],
+      optionalParameterList: [
+        {
+          parameterName: "Дополнительные проектные затраты", // #0
+          number: 0
+        },
+        {
+          parameterName: "Дополнительные капитальные затраты", // #1
+          number: 0
+        },
+        {
+          parameterName: "Дополнительные эксплуатационные затраты", // #2
+          number: 0
+        },
+      ],
 
       dropzoneFile: '', // Store our uploaded files
       active: false,
@@ -367,6 +381,10 @@ export default {
           (Number(this.parameterList[6].number) +
             Number(this.parameterList[11].number) +
             Number(this.parameterList[13].number)));
+      if (Number(this.optionalParameterList[0].number) > 0) {
+        this.parameterList[15].number += Math.round(Number(this.parameterList[14].number) / 100 *
+          Number(this.optionalParameterList[0].number));
+      }
       return this.parameterList[15].number;
     },
     Design_costs() {
@@ -375,6 +393,9 @@ export default {
           Number(this.parameterList[13].number) +
           Number(this.parameterList[11].number) +
           Number(this.parameterList[15].number));
+      if (Number(this.optionalParameterList[0].number) > 0) {
+        this.parameterList[16].number += Math.round(Number(this.optionalParameterList[0].number));
+      }
       return this.parameterList[16].number;
     },
     Costs_for_technical_controls_1() {
@@ -414,6 +435,9 @@ export default {
           Number(this.parameterList[23].number) +
           Number(this.parameterList[24].number) +
           Number(this.parameterList[33].number));
+      if (Number(this.optionalParameterList[1].number) > 0) {
+        this.parameterList[34].number += Math.round(Number(this.optionalParameterList[1].number));
+      }
       return this.parameterList[34].number;
     },
     Surcharge_OC() {
@@ -469,6 +493,10 @@ export default {
           Number(this.parameterList[45].number) +
           Number(this.parameterList[46].number)) *
           Number(this.parameterList[47].number) / 100);
+      if (Number(this.optionalParameterList[2].number) > 0) {
+        this.parameterList[48].number += Math.round(Number(this.optionalParameterList[2].number) *
+          Number(this.parameterList[47].number) / 100);
+      }
       return this.parameterList[48].number;
     },
     Operating_costs() {
@@ -479,6 +507,9 @@ export default {
           Number(this.parameterList[45].number) +
           Number(this.parameterList[46].number) +
           Number(this.parameterList[48].number));
+      if (Number(this.optionalParameterList[2].number) > 0) {
+        this.parameterList[49].number += Math.round(Number(this.optionalParameterList[2].number));
+      }
       return this.parameterList[49].number;
     },
     Other_expense_groups() {
@@ -580,7 +611,10 @@ export default {
           ["DE8", this.Other_expense_groups],
           ["IC1", this.parameterList[56].number],
           ["IC2", this.parameterList[57].number],
-          ["TCO", this.TCO]
+          ["TCO", this.TCO],
+          [this.optionalParameterList[0].parameterName, this.optionalParameterList[0].number],
+          [this.optionalParameterList[1].parameterName, this.optionalParameterList[1].number],
+          [this.optionalParameterList[2].parameterName, this.optionalParameterList[2].number],
         ]);
     },
 
@@ -640,6 +674,9 @@ export default {
             self.parameterList[54].number = results.data[62][1];
             self.parameterList[56].number = results.data[64][1];
             self.parameterList[57].number = results.data[65][1];
+            self.optionalParameterList[0].number = results.data[67][1];
+            self.optionalParameterList[1].number = results.data[68][1];
+            self.optionalParameterList[2].number = results.data[69][1];
           }
         });
       }
@@ -1100,6 +1137,24 @@ export default {
           </div>
         </div>
         <div class="row p-4">
+          <p class="h4">Дополнительные проектные затраты</p>
+          <div class="row align-items-center">
+            <div class="col mx-4 p-0 fs-5 col-4">
+              <p>
+                Например, стоимость электроэнергии, потребляемой комплексом вычислительной техники,
+                стоимость вспомогательных материалов, затраты, связанные с арендой помещения,
+                затраты на текущий и профилактический ремонт, расходы, связанные с покупкой и установкой оборудования для
+                центра обработки данных, затраты на сетевое управление, затраты на управление системой и другие.
+                В случае, если перечисленные затраты находятся в пределах 3-5% от К<sub>зп</sub>, рекомендуется учесть их
+                в составе К<sub>проч</sub>.
+              </p>
+            </div>
+            <div class="col fs-5 col-5">
+              <CalculationParameter v-model="optionalParameterList[0].number" />
+            </div>
+          </div>
+        </div>
+        <div class="row p-4">
           <p class="h4">К<sub>проч</sub></p>
           <div class="row align-items-center">
             <div class="col mx-4 p-0 fs-5 col-4">
@@ -1129,8 +1184,9 @@ export default {
             {{ parameterList[6].number }} +
             {{ parameterList[13].number }} +
             {{ parameterList[11].number }} +
+            {{ Number(optionalParameterList[0].number) > 0 ? (optionalParameterList[0].number + ' +') : '' }}
             {{ parameterList[15].number }} =
-            {{ Design_costs }}
+            {{ Design_costs }} руб.
           </p>
         </div>
       </div>
@@ -1170,7 +1226,7 @@ export default {
               К<sub>тс</sub> =
               {{ Costs_for_technical_controls_1 }} +
               {{ parameterList[18].number }} =
-              {{ Costs_for_technical_controls_2 }}
+              {{ Costs_for_technical_controls_2 }} руб.
             </div>
           </div>
         </div>
@@ -1471,6 +1527,20 @@ export default {
           </div>
         </div>
         <div class="row p-4">
+          <p class="h4">Дополнительные капитальные затраты</p>
+          <div class="row align-items-center">
+            <div class="col mx-4 p-0 fs-5 col-4">
+              <p>
+                Например, затраты на привлечение внешних консультантов, затраты на учебные курсы и сертификацию, стоимость
+                электроэнергии, потребляемой комплексом вычислительной техники и другие.
+              </p>
+            </div>
+            <div class="col fs-5 col-5">
+              <CalculationParameter v-model="optionalParameterList[1].number" />
+            </div>
+          </div>
+        </div>
+        <div class="row p-4">
           <p class="h4">
             К =
             {{ parameterList[16].number }} +
@@ -1479,8 +1549,9 @@ export default {
             {{ parameterList[22].number }} +
             {{ parameterList[23].number }} +
             {{ parameterList[24].number }} +
-            {{ parameterList[33].number }} =
-            {{ Capital_expenditures }}
+            {{ parameterList[33].number }}
+            {{ Number(optionalParameterList[1].number) > 0 ? (' + ' + Number(optionalParameterList[1].number)) : '' }} =
+            {{ Capital_expenditures }} руб.
           </p>
         </div>
       </div>
@@ -1511,8 +1582,7 @@ export default {
             С<sub>проч</sub> – прочие затраты.<br>
           </div>
         </div>
-
-        <div class="col p-4">
+        <div class="row p-4">
           <p class="h4">С<sub>зп</sub></p>
           <div class="table-responsive fs-5">
             <table class="table table-bordered">
@@ -1624,7 +1694,7 @@ export default {
             С<sub>зп</sub> = {{ Math.round(parameterList[38].number * parameterList[39].number / 168) }} руб.
           </div>
         </div>
-        <div class="col p-4">
+        <div class="row row-cols-1 p-4">
           <p class="h4">С<sub>ао</sub></p>
           <div class="row align-items-center">
             <div class="col mx-4 p-0 fs-5 col-4">
@@ -1650,18 +1720,18 @@ export default {
               <CalculationParameter v-model="parameterList[42].number" />
             </div>
           </div>
-          <div class="container fs-5">
+          <div class="col mx-4 p-0 fs-5">
             Н<sub>ам</sub> = {{ Math.round(100 / Number(parameterList[42].number)) }}%.
           </div>
-          <div class="container fs-5">
+          <div class="col mx-4 p-0 fs-5">
             А<sub>год</sub> = {{ Math.round(Number(parameterList[40].number) * (100 / Number(parameterList[42].number)) /
               100) }} руб.
           </div>
-          <div class="container fs-5">
+          <div class="col mx-4 p-0 fs-5">
             А<sub>эксп</sub> = {{ Depreciation_deductions }} руб.
           </div>
         </div>
-        <div class="col p-4">
+        <div class="row p-4">
           <p class="h4">
             С<sub>то</sub>
           </p>
@@ -1676,7 +1746,7 @@ export default {
             </div>
           </div>
         </div>
-        <div class="col p-4">
+        <div class="row p-4">
           <p class="h4">
             С<sub>лс</sub>
           </p>
@@ -1691,7 +1761,7 @@ export default {
             </div>
           </div>
         </div>
-        <div class="col p-4">
+        <div class="row p-4">
           <p class="h4">
             С<sub>ни</sub>
           </p>
@@ -1706,7 +1776,25 @@ export default {
             </div>
           </div>
         </div>
-        <div class="col p-4">
+        <div class="row p-4">
+          <p class="h4">Дополнительные эксплуатационные затраты</p>
+          <div class="row align-items-center">
+            <div class="col mx-4 p-0 fs-5 col-4">
+              <p>
+                Например, затраты на привлечение внешних консультантов, затраты, связанные с арендой помещения,
+                затраты на текущий и профилактический ремонт, стоимость обновлений основных модулей информационной
+                системы,
+                заработная плата обслуживающего персонала и другие.
+                В случае, если перечисленные затраты находятся в пределах 3-5% от С<sub>зп</sub>, рекомендуется учесть
+                их в составе С<sub>проч</sub>.
+              </p>
+            </div>
+            <div class="col fs-5 col-5">
+              <CalculationParameter v-model="optionalParameterList[2].number" />
+            </div>
+          </div>
+        </div>
+        <div class="row p-4">
           <p class="h4">С<sub>проч</sub></p>
           <div class="row align-items-center">
             <div class="col mx-4 p-0 fs-5 col-4">
@@ -1730,7 +1818,7 @@ export default {
             </div>
           </div>
         </div>
-        <div class="col p-4">
+        <div class="row p-4">
           <p class="h4">
             С =
             {{ Math.round(parameterList[38].number * parameterList[39].number / 168) }} +
@@ -1738,6 +1826,7 @@ export default {
             {{ parameterList[44].number }} +
             {{ parameterList[45].number }} +
             {{ parameterList[46].number }} +
+            {{ Number(optionalParameterList[2].number) > 0 ? (Number(optionalParameterList[2].number) + ' +') : '' }}
             {{ parameterList[48].number }} =
             {{ Operating_costs }} руб.
           </p>

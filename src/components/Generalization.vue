@@ -192,6 +192,10 @@ export default {
 
             if (months === 1) {
                 return `${months} месяц`;
+            } else if (months % 10 === 1 && months !== 11) {
+                return `${months} месяц`;
+            } else if (months % 10 >= 2 && months % 10 <= 4 && (months < 10 || months > 20)) {
+                return `${months} месяца`;
             } else {
                 return `${months} месяцев`;
             }
@@ -355,7 +359,7 @@ export default {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th>К<sub>а</sub></th>
+                                    <th>К<sub>а</sub> – коэффициент актуальности</th>
                                     <td>
                                         <CalculationParameter v-model="parameterList[0].number" />
                                     </td>
@@ -364,7 +368,7 @@ export default {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>К<sub>п</sub></th>
+                                    <th>К<sub>п</sub> − коэффициент соответствия</th>
                                     <td>
                                         <CalculationParameter v-model="parameterList[1].number" />
                                     </td>
@@ -373,7 +377,7 @@ export default {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>К<sub>с</sub></th>
+                                    <th>К<sub>с</sub> – коэффициент сложности</th>
                                     <td>
                                         <CalculationParameter v-model="parameterList[2].number" />
                                     </td>
@@ -382,7 +386,7 @@ export default {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>К<sub>м</sub></th>
+                                    <th>К<sub>м</sub> – коэффициент места использования</th>
                                     <td>
                                         <CalculationParameter v-model="parameterList[3].number" />
                                     </td>
@@ -391,7 +395,7 @@ export default {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>К<sub>о</sub></th>
+                                    <th>К<sub>о</sub> – коэффициент объема использования</th>
                                     <td>
                                         <CalculationParameter v-model="parameterList[4].number" />
                                     </td>
@@ -400,7 +404,7 @@ export default {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>К<sub>ш</sub></th>
+                                    <th>К<sub>ш</sub> – коэффициент широты охвата охранными мероприятиями</th>
                                     <td>
                                         <CalculationParameter v-model="parameterList[5].number" />
                                     </td>
@@ -565,8 +569,8 @@ export default {
                             <thead class="table-light">
                                 <tr>
                                     <th class="align-middle" scope="col">Затраты</th>
-                                    <th scope="col">Базовый вариант</th>
-                                    <th scope="col">Разрабатываемый вариант</th>
+                                    <th scope="col">Базовый вариант, руб.</th>
+                                    <th scope="col">Разрабатываемый вариант, руб.</th>
                                 </tr>
                             </thead>
                             <tbody>

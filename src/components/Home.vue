@@ -21,7 +21,7 @@ export default {
     </div>
   </div>
   <div class="container">
-    <div class="row row-cols-auto row-cols-md-2 mt-5 g-4">
+    <div class="row row-cols-auto row-cols-md-2 mt-5 mb-5 g-4">
       <div class="col">
         <div class="card text-center shadow">
           <div class="card-body">
